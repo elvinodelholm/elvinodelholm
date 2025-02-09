@@ -1,188 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flagship</title>
-    <link rel="icon" type="image/x-icon" href="boat-assets/icon.png" />
-    <link rel="stylesheet" href="style.css" />
-    <style>
-      /* Desktop */
-      @media only screen and (min-width: 1000px) {
-      .flagpole-1 {
-        position: absolute;
-        top: 5vw;
-        left: 72vw;
-        display: flex;
-      }
-      .flagpole-1 .pole {
-        height: 240vw;
-      }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6-Column Grid Layout</title>
+    <link rel="stylesheet" href="styles.css">
+<style>
+ /* Special Header Item */
+ .special-header {
+            display: none;
+        }
 
-      .flagpole-2 {
-        position: absolute;
-        top: 46vw;
-        left: 34vw;
-        display: flex;
-      }
-      .flagpole-2 .pole {
-        height: 188vw;
-      }
-      .flagpole-3 {
-        position: absolute;
-        top: 64vw;
-        left: 89vw;
-        display: flex;
-      }
-      .flagpole-3 .pole {
-        height: 181vw;
-      }
-      .flagpole-4 {
-        position: absolute;
-        top: 109vw;
-        left: 49vw;
-        display: flex;
-      }
-      .flagpole-4 .pole {
-        height: 125vw;
-      }
-      .flagpole-5 {
-        position: absolute;
-        top: 136vw;
-        left: 84vw;
-        display: flex;
-      }
-      .flagpole-5 .pole {
-        height: 110vw;
-      }
-      
+        .special-header div {
+            display: flex;
+            justify-content: space-between;
+        }
 
-      
-    
-      #boat-img {
-        top: 200vw;
-      }
-      #boat-gif {
-        top: 200vw;
-      }
-    }
-    /* Mobile */
-    @media only screen and (max-width: 999px) {
-      .flagpole-1 {
-        position: absolute;
-        top: 15vw;
-        left: 72vw;
-        display: flex;
-      }
-      .flagpole-1 .pole {
-        height: 230vw;
-      }
+        @media (max-width: 768px) {
+            .special-header {
+                display: block;
+                text-align: left;
+            }
+        }
+</style>
+</head>
 
-      .flagpole-2 {
-        position: absolute;
-        top: 56vw;
-        left: 34vw;
-        display: flex;
-      }
-      .flagpole-2 .pole {
-        height: 178vw;
-      }
-      .flagpole-3 {
-        position: absolute;
-        top: 74vw;
-        left: 89vw;
-        display: flex;
-      }
-      .flagpole-3 .pole {
-        height: 171vw;
-      }
-      .flagpole-4 {
-        position: absolute;
-        top: 119vw;
-        left: 49vw;
-        display: flex;
-      }
-      .flagpole-4 .pole {
-        height: 115vw;
-      }
-      .flagpole-5 {
-        position: absolute;
-        top: 154vw;
-        left: 68vw;
-        display: flex;
-      }
-      .flagpole-5 .pole {
-        height: 90vw;
-      }
-  
-    
-      #boat-img {
-        top: 200vw;
-      }
-      #boat-gif {
-        top: 200vw;
-      }
-    }
+<body>
+    <header class="grid-container">
+        <div></div>
+        <div class="hide-on-mobile">Elvin Odelholm<br>@elvinodelholm</div>
+        <div class="hide-on-mobile">Stockholm,<br>Sweden</div>
+        <div class="hide-on-mobile">Graphic Design<br>& Art Direction</div>
+        <div class="hide-on-mobile">elvin.odelholm@gmail.com<br>+46 76 561 14 95</div>
+        <div></div>
+        <div class="special-header">
+            <div>
+                <span>ELVIN ODELHOLM<br>@ELVINODELHOLM</span>
+                <span>GRAPHIC DESIGN<br>& ART DIRECTION</span>
+            </div>
+        </div>
+    </header>
 
+    <main>
+        <div class="grid-container">
+            <div class="hide-on-mobile"></div>
+            <div class="span-2"><img src="assets/material worlds julia elvin odelholm.jpg" alt="image"></div>
+            <div class="span-2"><img src="assets/material worlds print otto elvin odelholm.jpg" alt="image"></div>
+            <div class="hide-on-mobile">‣ Art Direction<br>‣ Photography<br>‣ Graphic Design<br>‣ Print</div>
+            <div class="hide-on-mobile"></div>
+            <div class="span-2"><img src="assets/136 bts3 elvin odelholm.jpg" alt="image"></div>
+            <div class="span-2"><img src="assets/136 gustav elvin odelholm.png" alt="image"></div>
+            <div class="hide-on-mobile">‣ Art Direction<br>‣ Photography<br>‣ Video Design<br>‣ Graphic Design<br>‣ Print</div>
+            <div class="hide-on-mobile"></div>
+            <div class="span-2"><img src="assets/collecting show 2 elvin odelholm.jpg" alt="image"></div>
+            <div class="span-2"><img src="assets/collecting studio 1 elvin odelholm.jpg" alt="image"></div>
+            <div class="hide-on-mobile">‣ Art Direction<br>‣ Concept<br>‣ Graphic Design<br> ‣ Print</div>
+            <div class="hide-on-mobile"></div>
+            <div class="span-2"><img src="assets/exid drag elvin odelholm.gif" alt="image"></div>
+            <div class="span-2"><img src="assets/exid drop elvin odelholm.gif" alt="image"></div>
+            <div class="hide-on-mobile">‣ Art Direction<br>‣ Concept<br>‣ Video Design</div>
+            <div class="hide-on-mobile"></div>
+            <div class="span-2"><img src="assets/spegling two chairs elvin odelholm.jpg" alt="image"></div>
+            <div class="span-2"><img src="assets/spegling body doubling elvin odelholm.gif" alt="image"></div>
+            <div class="hide-on-mobile">‣ Art Direction<br>‣ Concept<br>‣ Video Design</div>
+            <div class="hide-on-mobile"></div>
+            <div class="span-2"><img src="assets/krk dripper elvin odelholm.gif" alt="image"></div>
+            <div class="span-2"><img src="assets/krk kras elvin odelholm.gif" alt="image"></div>
+            <div class="hide-on-mobile">‣ Art Direction<br>‣ Concept<br>‣ Video Design</div>
+            <div class="hide-on-mobile"></div>
+            <div class="span-2"><img src="assets/krunetroll tour elvin odelholm.jpg" alt="image"></div>
+            <div class="span-2"><img src="assets/krunetroll elvin odelholm.gif" alt="image"></div>
+            <div class="hide-on-mobile">‣ Art Direction<br>‣ Concept<br>‣ Video Design</div>
+            <div class="hide-on-mobile"></div>
+            <div class="span-2"><img src="assets/ad horse elvin odelholm.jpg" alt="image"></div>
+            <div class="span-2"><img src="assets/ad horse bts1 elvin odelholm.jpg" alt="image"></div>
+            <div class="hide-on-mobile">‣ Art Direction<br>‣ Photography</div>
+        </div>
+    </main>
 
-      
-    </style>
-  </head>
-  <body>
-    <div class="fixed">
-      <a target="_self" href="index.html" class="top-left">Projects</a>
-      <a target="_self" href="about.html" class="top-right">About</a>
-    </div>
-
-    <div id="animatedBackground"></div>
-
-    <div class="flagpole-1">
-      <img class="knob" src="boat-assets/knob.png" alt="knob" />
-      <img class="pole" src="boat-assets/pole.png" alt="pole" />
-      <img class="index-sleeve" src="boat-assets/sleeve.png" alt="sleeve" />
-      <a target="_self" href="project-1.html" target="_blank">
-      <img class="index-image" src="assets/ad horse elvin odelholm.jpg" alt="image" />
-      </a>
-    </div>
-
-    <div class="flagpole-2">
-      <img class="knob" src="boat-assets/knob.png" alt="knob" />
-      <img class="pole" src="boat-assets/pole.png" alt="pole" />
-      <img class="index-sleeve-tall" src="boat-assets/sleeve.png" alt="sleeve" />
-      <a target="_self" href="project-2.html" target="_blank">
-        <img class="index-image-tall" src="assets/collecting hang elvin odelholm.jpg" alt="image" />
-      </a>
-    </div>
-
-    <div class="flagpole-3">
-      <img class="knob" src="boat-assets/knob.png" alt="knob" />
-      <img class="pole" src="boat-assets/pole.png" alt="pole" />
-      <img class="index-sleeve" src="boat-assets/sleeve.png" alt="sleeve" />
-      <a target="_self" href="project-3.html" target="_blank">
-        <img class="index-image" src="assets/yoghurt dripper elvin odelholm.gif" alt="image" />
-      </a>
-    </div>
-
-    <div class="flagpole-4">
-      <img class="knob" src="boat-assets/knob.png" alt="knob" />
-      <img class="pole" src="boat-assets/pole.png" alt="pole" />
-      <img class="index-sleeve-mini" src="boat-assets/sleeve.png" alt="sleeve" />
-      <a target="_self" href="project-4.html" target="_blank">
-        <img class="index-image-mini" src="assets/kjartan slettemark elvin odelholm.gif" alt="image" />
-      </a>
-    </div>
-
-    <div class="flagpole-5">
-      <img class="knob" src="boat-assets/knob.png" alt="knob" />
-      <img class="pole" src="boat-assets/pole.png" alt="pole" />
-      <img class="index-sleeve-mini" src="boat-assets/sleeve.png" alt="sleeve" />
-      <a target="_self" href="project-5.html" target="_blank">
-        <img class="index-image-mini" src="assets/penntroll.gif" alt="image" />
-      </a>
-    </div>
-
-
-    <img src="boat-assets/boat.png" id="boat-img" />
-    <img src="boat-assets/boat-hd.gif" id="boat-gif" />
-  </body>
+    <footer class="grid-container">
+        <div></div>
+        <div class="span-2">
+            <div style="font-weight: normal;">
+                Elvin Odelholm is a Stockholm-based graphic designer and art director. He has a background in independent fanzines working with a wide range of experimental photography, and digital montage. He's currently working on his final projects at Beckmans College of Design, leading up to graduation in June 2025.
+                <br><br><br>
+            </div>
+        </div>
+    </footer>
+</body>
 </html>

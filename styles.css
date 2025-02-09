@@ -1,0 +1,122 @@
+/* General Body Styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    
+    background-color: black;
+    color: #c5c5c5;
+    line-height: 1.3;
+}
+
+/* Grid Container */
+.grid-container {
+    display: grid;
+    grid-template-columns: 0.7fr repeat(4, 1fr) 0.7fr;
+    column-gap: 1.5vw;
+    row-gap: 40vw;
+    padding: 1.5vw;
+    align-content: center;
+    justify-content: center;
+    justify-content: center; /* centers items horizontally */
+    align-items: top; /* centers items vertically */
+}
+
+/* Spanning Two Columns */
+.span-2 {
+    grid-column: span 2;
+}
+
+/* Image Styling */
+img { 
+    width: 100%;
+    height: auto;
+}
+
+/* Resume Footer Styles */
+.resume-footer-mobile {
+    display: none;
+}
+
+.resume-footer-mobile div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.resume-footer {
+    display: grid;
+    grid-template-columns: 1.5fr 3fr;
+    gap: 4vw;
+    font-size: 14px;
+    line-height: 1.6;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.resume-footer div {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-footer-mobile {
+    display: none;
+}
+
+.contact-footer-mobile {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+/* Media Queries */
+@media (min-width: 769px) {
+    .body{
+        font-size: 0.8em;
+    }
+
+    .grid-container {
+        gap: 10vw 2.5vw;
+    }
+
+    .contact-footer-mobile {
+        display: none; /* Force hidden on desktop */
+    }
+    
+}
+
+@media (max-width: 768px) {
+    .body{
+        font-size: 4em;
+    }
+
+    .grid-container {
+        grid-template-columns: 1fr;
+        gap: 2vw;
+        padding: 3vw;
+    }
+
+    .span-2 {
+        grid-column: auto;
+    }
+
+    .resume-footer {
+        grid-column: auto;
+    }
+
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .resume-footer-mobile {
+        display: block; /* Ensure visibility */
+        text-align: left;
+    }
+
+    .contact-footer-mobile {
+        display: flex; /* Visible only on mobile screens */
+        text-align: left;
+    }
+
+    
+}
+

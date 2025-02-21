@@ -68,6 +68,10 @@ body {
     text-decoration: none;
     color: inherit;
   }
+
+   a:hover {
+    text-decoration: underline;
+  }
   
   /* New CSS for Info Button Functionality */
   

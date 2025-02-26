@@ -151,8 +151,8 @@ body {
       display: none; /* Hide mobile footer on desktop */
     }
     .portrait {
-      display: none; /* Hide mobile footer on desktop */
     }
+
     .text-container {
       grid-column: span 2;
       margin-bottom: 5vw;

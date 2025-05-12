@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(to bottom, #6da1cb, #abe1fb); /* lighter dark blue */
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+.image-scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 8vw;
+}
+
+.image-scroll img {
+  max-width: 20vw;
+}
+
+.book-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 40vw;
+}
+
+
+
+.back {
+  position: absolute;
+  top: 0;
+  left: 394px;
+  height: 600px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+.book-wrapper {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  background: transparent;
+}
+
+
+
+.flipbook {
+  position: absolute;
+  top: 0;          /* or offset as needed relative to background */
+  left: 0;
+  width: 850px;
+  height: 600px;
+  z-index: 1;
+}
+
+.flipbook .page {
+  width: 425px;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.flipbook .page img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}

@@ -1,385 +1,387 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elvin Odelholm</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.png">
-  <style>
-    /* Special Header Item */
-    .special-header {
-      display: none;
-    }
-    .special-header div {
-      display: flex;
-      justify-content: space-between;
-    }
-    @media (max-width: 768px) {
-      .special-header {
-        display: block;
-        text-align: left;
-      }
-    }
-  </style>
-</head>
-<body>
-  <header class="grid-container">
-    <div></div>
-    <div class="hide-on-mobile">
-      Elvin Odelholm<br>
-      <a href="https://www.instagram.com/elvinodelholm/">@elvinodelholm</a>
-    </div>
-    <div class="hide-on-mobile">Stockholm,<br>Sweden</div>
-    <div class="hide-on-mobile">Graphic Design<br>& Art Direction</div>
-    <div class="hide-on-mobile">elvin.odelholm@gmail.com<br>+46 76 561 14 95</div>
-    <div></div>
-    <div class="special-header">
-      <div>
-        <span>Elvin Odelholm<br>
-          <a href="https://www.instagram.com/elvinodelholm/">@elvinodelholm</a>
-        </span>
-        <span style="text-align: right;">Graphic Design<br>& Art Direction</span>
+   <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Elvin Odelholm Portfolio</title>
+      <style>
+         * {
+         margin: 0;
+         padding: 0;
+         box-sizing: border-box;
+         }
+         html, body {
+         height: 100%;
+         font-family: 'Arial Narrow', sans-serif;
+         }
+         a {
+         color: inherit;
+         text-decoration: none;
+         }
+         .layout {
+         display: grid;
+         grid-template-columns: 1fr 2fr;
+         height: 100vh;
+         overflow: hidden;
+         }
+         .column-fixed {
+         display: flex;
+         flex-direction: column;
+         justify-content: flex-start;
+         background-color: #c5c5c5;
+         padding: 20px;
+         border-right: 2px solid black;
+         overflow-y: auto;
+         }
+         .text-container-1 {
+         margin-bottom: 20px;
+         }
+         .text-container-2 p {
+         display: none;
+         margin-bottom: 20px;
+         }
+         .text-container-2 p.active {
+         display: block;
+         }
+         .text-container-3 {
+         margin-top: auto;
+         }
+         .cv-entry {
+         display: flex;
+         justify-content: space-between;
+         margin-bottom: 4px;
+         }
+         .cv-entry i {
+         font-style: italic;
+         font-weight: normal;
+         }
+         .cv-label {
+         white-space: nowrap;
+         overflow: hidden;
+         text-overflow: ellipsis;
+         }
+         .cv-year {
+         margin-left: 20px;
+         white-space: nowrap;
+         font-style: italic;
+         }
+         .contact {
+         margin-top: 20px;
+         }
+         .scroll-area {
+         overflow-y: auto;
+         padding: 20px;
+         }
+         .grid {
+         display: grid;
+         grid-template-columns: 1fr 1fr;
+         gap: 20px;
+         }
+         .image-wrapper {
+         width: 100%;
+         display: flex;
+         align-items: center;
+         justify-content: center;
+         overflow: hidden;
+         }
+         .image-wrapper img {
+         width: 100%;
+         height: 100%;
+         object-fit: cover;
+         }
+         .mobile-header {
+         display: none;
+         padding: 20px;
+         margin-bottom: 25vh;
+         }
+         .mobile-text {
+         display: none;
+         font-size: 1.1em;
+         margin: 150px 0 10px;
+         }
+         .mobile-footer {
+         display: none;
+         padding: 20px;
+         background-color: #c5c5c5;
+         border-top: 2px solid black;
+         margin-top: 150px;
+         }
+         .mobile-footer p {
+         margin-bottom: 10px;
+         }
+         .mobile-stamp {
+         display: none;
+         }
+         .spacer {
+         height: 10vh;
+         pointer-events: none;
+         }
+         /* Mobile layout */
+         @media (max-width: 768px) {
+         .layout {
+         display: block;
+         height: auto;
+         }
+         .column-fixed {
+         display: none;
+         }
+         .scroll-area {
+         padding: 10px;
+         }
+         .grid {
+         grid-template-columns: 1fr;
+         gap: 10px;
+         }
+         .mobile-header{
+         display: block;
+         padding: 10px; /* same as .scroll-area padding on mobile */
+         }
+         .mobile-text,
+         .mobile-footer {
+         display: block;
+         }
+         .mobile-stamp {
+         display: flex;
+         justify-content: center;
+         padding: 10px;
+         margin-bottom: 12vh;
+         }
+         .mobile-stamp img {
+         width: 150px;
+         height: auto;
+         } 
+         }
+      </style>
+   </head>
+   <body>
+      <div class="mobile-header"><b>Elvin Odelholm</b><br>
+         Art Director based in Stockholm.
       </div>
-    </div>
-  </header>
-
-  <main>
-    <div class="grid-container">
-      <div class="hide-on-mobile"></div>
-      <div class="span-2">
-        <img src="assets/136 johannes elvin odelholm.png" alt="image">
+      <div class="mobile-stamp">
+         <img src="assets/stamp.gif" alt="stamp" />
       </div>
-      <div class="span-2">
-        <img src="assets/136 vanja elvin odelholm.png" alt="image">
-      </div>
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-      <div class="span-2">
-        <img src="assets/136 invite 2 elvin odelholm.gif" alt="image">
-      </div>
-      <div class="span-2">
-        <img src="assets/136 bts3 elvin odelholm.jpg" alt="image">
-      </div>
-    
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-      
-      <!-- First text block -->
-      <div class="text-container">
-        <button class="info-button">Show Info</button>
-        <div class="text-content">
-
-          Art Direction, Photography, Motion Design and Printed Running Order for Beckmans Fashion Collaboration 2025 featuring:<br>
-          <br>
-          Arket<br>
-          Asket<br>
-          & Other Stories<br>
-          Rave Review<br>
-          Remake<br>
-          Weekday<br>
-          <br>
-          Creative Direction: Annika Berner<br>
-          Art Direction and Photography: Elvin Odelholm<br>
-          Head of Course: Elisabet Yanagisawa<br>
-          Head of Programe: Per Engsheden
-        </div>
-      </div>
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-      
-      
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-
-      <div class="span-2">
-        <img src="assets/material worlds elvin odelholm.gif" alt="image">
-      </div>
-      <div class="span-2">
-        <img src="assets/material worlds nice print elvin odelholm.jpg" alt="image">
-      </div>
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-      
-      <!-- Second text block -->
-      <div class="text-container">
-        <button class="info-button">Show Info</button>
-        <div class="text-content">
-          Art Direction Photography and Printed Lookbook for Beckmans Fashion Show “Material Worlds”.
-          <br><br>
-          Team: Elvin Odelholm, Jesper Smeding<br>
-          Head of Course: Göran Sundberg<br>
-          Head of Programe: Per Engsheden
-        </div>
-      </div>
-
-      
-      
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-      
-     
-
-
-      <!-- Video sections -->
-      <div class="span-2">
-        <video autoplay muted loop playsinline style="width: 100%; height: auto;">
-          <source src="assets/spegling body doubling 3 elvin odelholm.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div> 
-      <div class="span-2">
-        <video autoplay muted loop playsinline style="width: 100%; height: auto;">
-          <source src="assets/spegling rummet elvin odelholm.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </div>     
+      <div class="layout">
+         <div class="column-fixed">
+            <div class="text-container-1">
+               <b>Elvin Odelholm</b>
+               <p>Art Director based in Stockholm.</p>
+            </div>
+            <div class="text-container-2" id="text-container-2">
+               <p id="text-red" class="active">
+                  <b>13:6 Collaborations</b><br>
+                  <i>Art Direction, Photography, Graphic Design</i><br><br>
+                  Graphic identity, running order and promotion for the Beckmans Collaboration Show 2025. 
+                  The fashion students wanted a classic look with a focus on raw materials. Following the theme, I shot the models against a lit softbox as a backdrop, creating stark contrast and a raw, unpolished frame that became central to the visual identity.
+                  <br><br>
+                  <b>Creative Direction:</b> Annika Berner<br>
+                  <b>Art Direction and Photography:</b> Elvin Odelholm<br>
+                  <b>Head of Course:</b> Elisabet Yanagisawa<br>
+                  <b>Head of Programme:</b> Per Engsheden<br>
+               </p>
+               <p id="text-purple"><b>Core Curriculum</b><br>
+                  <i>Art Direction, Photography, Graphic Design</i><br><br>
+                  A photo series and a book as part of my graduation project at Beckmans College of Design. After 17 years of school, I looked back on my experience of school and realised that a big part of my memories revolved around small, seemingly pointless activities, things that had nothing to do with grades or curriculum. I wanted to highlight these memories and question what we consider meaningful or meaningless. Using a wig and some post-production, I stepped into the role of a schoolchild and restaged a series of memories. I then compiled the photos into a book inspired by the official Swedish curriculum.  
+                  <br><br>
+                  <b>Art Direction, Design & Photography:</b> Elvin Odelholm<br>
+                  <b>Head of Course:</b> Sophia Wood
+               </p>
+                <p id="text-green"> <b>Collecting Music</b><br>
+                  <i>Art Direction, Graphic Design</i><br><br>
+                  We were assigned to create magazines about music. My group decided to use collecting and statistics as our angle. I made a centrefold poster illustrating the 100 most common nouns in the lyrics of the 100 most streamed songs. 
+                  <br><br>
+                  <b>Team:</b> Elvin Odelholm, Adam Arinbjarnarson, Solvej Jansson<br>
+                  <b>Head of Course:</b> Stefania Malmsten
+               </p>
+                 <p id="text-orange"> <b>Ad Space For Rent</b><br>
+                  <i>Concept, Photography</i><br><br>
+                  Part of the application process for Beckmans College of Design was to design large-scale public typography. Since Beckmans has a background as an advertising school, I proposed an idea for how to generate new types of ad revenue.                  <br><br>
+               </p>
+               <p id="text-yellow"><b>Body Doubling</b><br>
+                  <i>Art Direction, Motion Design</i><br><br>
+                  A House wanted to collaborate with Beckmans to host an exhibition and screening about the workplace of the future. Our group created a video illustrating body doubling, the phenomenon of unconsciously mimicking the people around us. We saw this as something worth considering when designing the workplace of the future. 
+                  <br><br>
+                  <b>Team:</b> Elvin Odelholm, Maja Ringsäter, Solvej Jansson<br>
+                  <b>Head of Course:</b> Sophia Wood
+               </p>
+               <p id="text-blue"><b>Material Worlds</b><br>
+                  <i>Art Direction, Photography, Graphic Design</i><br><br>
+                  To highlight the materials and the concept Material Worlds, we took close-up shots of the specific garments and turned them into postcard-like landscapes. The models were then placed within these landscapes for the images in the lookbook. In addition to the landscapes, the lookbook was inspired by the size of postcards and their handwritten notes.
+                  <br><br>
+                  <b>Team:</b> Elvin Odelholm, Jesper Smeding<br>
+                  <b>Head of Course:</b> Göran Sundberg<br>
+                  <b>Head of Programe:</b> Per Engsheden<br>
+               </p>
+             
+            </div>
+            <div class="text-container-3">
+               <b>CV</b><br>
+               <div class="cv-entry"><span class="cv-label">Plattform Produktion</span><span class="cv-year">2024</span></div>
+               <div class="cv-entry"><span class="cv-label"><i>Creative Assistant Internship</i></span></div>
+               <br>
+               <div class="cv-entry"><span class="cv-label">APE_CC</span><span class="cv-year">2023</span></div>
+               <div class="cv-entry"><span class="cv-label"><i>Design Internship</i></span></div>
+               <br>
+               <div class="cv-entry"><span class="cv-label">Beckmans College of Design</span><span class="cv-year">2022–2025</span></div>
+               <div class="cv-entry"><span class="cv-label"><i>BFA Visual Communication</i></span></div>
+               <br>
+               <div class="contact">
+                  <b>Contact</b><br>
+                  <a href="https://www.instagram.com/elvinodelholm/" target="_blank">Instagram: @elvinodelholm</a><br>
+                  <a href="mailto:elvin.odelholm@gmail.com">Mail: elvin.odelholm@gmial.com</a>
+               </div>
+            </div>
+         </div>
+         <div class="scroll-area" id="scroll-area">
+            <div class="grid">
+               <!-- Red -->
+               <div class="mobile-text"><b>13:6 Collaborations</b><br>
+                  <i>Art Direction, Photography, Graphic Design</i><br><br>
+                  Graphic identity, running order and promotion for the Beckmans Collaboration Show 2025. 
+                  The fashion students wanted a classic look with a focus on raw materials. Following the theme, I shot the models against a lit softbox as a backdrop, creating stark contrast and a raw, unpolished frame that became central to the visual identity.
+                  <br><br>
+                  <b>Creative Direction:</b> Annika Berner<br>
+                  <b>Art Direction and Photography:</b> Elvin Odelholm<br>
+                  <b>Head of Course:</b> Elisabet Yanagisawa<br>
+                  <b>Head of Programme:</b> Per Engsheden<br>
+               </div>
+               <div class="image-wrapper" data-color="Red"><img src="assets/136 vanja elvin odelholm.png" alt="Red" /></div>
+               <div class="image-wrapper" data-color="Red"><img src="assets/136 johannes elvin odelholm.png" alt="Red" /></div>
+               <div class="image-wrapper" data-color="Red"><img src="assets/136 bts1 elvin odelholm.jpg" alt="Red" /></div>
+               <div class="image-wrapper" data-color="Red"><img src="assets/136 scan1 elvin odelholm.jpg" alt="Red" /></div>
+               <div class="image-wrapper" data-color="Red"><img src="assets/136 bts3 elvin odelholm.jpg" alt="Red" /></div>
+               <div class="image-wrapper" data-color="Red"><img src="assets/136 invite 2 elvin odelholm.gif" alt="Red" /></div>
+                 <!-- Purple -->
+               <div class="mobile-text"><b>Core Curriculum</b><br>
+                  <i>Art Direction, Photography, Graphic Design</i><br><br>
+                  A photo series and a book as part of my graduation project at Beckmans College of Design. After 17 years of school, I looked back on my experience of school and realised that a big part of my memories revolved around small, seemingly pointless activities, things that had nothing to do with grades or curriculum. I wanted to highlight these memories and question what we consider meaningful or meaningless. Using a wig and some post-production, I stepped into the role of a schoolchild and restaged a series of memories. I then compiled the photos into a book inspired by the official Swedish curriculum.  
+                  <br><br>
+                  <b>Art Direction, Design & Photography:</b> Elvin Odelholm<br>
+                  <b>Head of Course:</b> Sophia Wood
+               </div>
+               <div class="image-wrapper" data-color="Purple"><img src="assets/centralt innehall vaga2 elvin odelholm.jpg" alt="Purple" /></div>
+               <div class="image-wrapper" data-color="Purple"><img src="assets/centralt innehall sudd elvin odelholm.jpg" alt="Purple" /></div>
+               <div class="image-wrapper" data-color="Purple"><img src="assets/centralt innehall smirnoff elvin odelholm.jpg" alt="Purple" /></div>
+               <div class="image-wrapper" data-color="Purple"><img src="assets/centralt innehall tatuering elvin odelholm.jpg" alt="Purple" /></div>
+               <div class="image-wrapper" data-color="Purple"><img src="assets/centralt innehall bok3 elvin odelholm.jpg" alt="Purple" /></div>
+               <div class="image-wrapper" data-color="Purple"><img src="assets/centralt innehall bok4 elvin odelholm.jpg" alt="Purple" /></div>
+               <div class="image-wrapper" data-color="Purple"><img src="assets/centralt innehall bts1 elvin odelholm.jpg" alt="Purple" /></div>
+               <div class="image-wrapper" data-color="Purple"><img src="assets/centralt innehall bts3 elvin odelholm.jpg" alt="Purple" /></div>
+                 <!-- Yellow -->
+               <div class="mobile-text"><b>Body Doubling</b><br>
+                  <i>Art Direction, Motion Design</i><br><br>
+                  A House wanted to collaborate with Beckmans to host an exhibition and screening about the workplace of the future. Our group created a video illustrating body doubling, the phenomenon of unconsciously mimicking the people around us. We saw this as something worth considering when designing the workplace of the future. 
+                  <br><br>
+                  <b>Team:</b> Elvin Odelholm, Maja Ringsäter, Solvej Jansson<br>
+                  <b>Head of Course:</b> Sophia Wood
+               </div>
+               <div class="image-wrapper" data-color="Yellow">
+                  <video autoplay muted loop playsinline style="width: 100%; height: auto;">
+                     <source src="assets/spegling body doubling 3 elvin odelholm.mp4" type="video/mp4">
+                     Your browser does not support the video tag.
+                  </video>
+               </div>
+               <div class="image-wrapper" data-color="Yellow">
+                  <video autoplay muted loop playsinline style="width: 100%; height: auto;">
+                     <source src="assets/spegling rummet elvin odelholm.mp4" type="video/mp4">
+                     Your browser does not support the video tag.
+                  </video>
+               </div>
+               <div class="image-wrapper" data-color="Yellow"><img src="assets/spegling bts1 elvin odelholm.jpg" alt="Yellow" /></div>
+               <div class="image-wrapper" data-color="Yellow"><img src="assets/spegling chair elvin odelholm.jpg" alt="Yellow" /></div>
+                <!-- Orange -->
+               <div class="mobile-text"><b>Ad Space For Rent</b><br>
+                  <i>Concept, Photography</i><br><br>
+                  Part of the application process for Beckmans College of Design was to design large-scale public typography. Since Beckmans has a background as an advertising school, I proposed an idea for how to generate new types of ad revenue.              
+               </div>
+               <div class="image-wrapper" data-color="Orange"><img src="assets/ad horse bts1 elvin odelholm.jpg" alt="Orange" /></div>
+               <div class="image-wrapper" data-color="Orange"><img src="assets/ad horse elvin odelholm.jpg" alt="Orange" /></div>
+         <!-- Green -->
+               <div class="mobile-text"><b>Collecting Music</b><br>
+                  <i>Art Direction, Graphic Design</i><br><br>
+                  We were assigned to create magazines about music. My group decided to use collecting and statistics as our angle. I made a centrefold poster illustrating the 100 most common nouns in the lyrics of the 100 most streamed songs. 
+                  <br><br>
+                  <b>Team:</b> Elvin Odelholm, Adam Arinbjarnarson, Solvej Jansson<br>
+                  <b>Head of Course:</b> Stefania Malmsten
+               </div>
+               <div class="image-wrapper" data-color="Green"><img src="assets/collecting-1 elvin odelholm.jpg" alt="Green" /></div>
+               <div class="image-wrapper" data-color="Green"><img src="assets/collecting-2 elvin odelholm.jpg" alt="Green" /></div>
+               <div class="image-wrapper" data-color="Green"><img src="assets/collecting 100 nouns elvin odelholm.jpg" alt="Green" /></div>
+               <div class="image-wrapper" data-color="Green"><img src="assets/collecting show 3 elvin odelholm.jpg" alt="Green" /></div>
+             <!-- Blue -->
+               <div class="mobile-text"><b>Material Worlds</b><br>
+                  <i>Art Direction, Photography, Graphic Design</i><br><br>
+                  To highlight the materials and the concept Material Worlds, we took close-up shots of the specific garments and turned them into postcard-like landscapes. The models were then placed within these landscapes for the images in the lookbook. In addition to the landscapes, the lookbook was inspired by the size of postcards and their handwritten notes.
+                  <br><br>
+                  <b>Team:</b> Elvin Odelholm, Jesper Smeding<br>
+                  <b>Head of Course:</b> Göran Sundberg<br>
+                  <b>Head of Programe:</b> Per Engsheden<br>
+               </div>
             
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-
- <!-- Third text block -->
- <div class="text-container">
-    <button class="info-button">Show Info</button>
-    <div class="text-content">
-      Videos about the future of the workplace. Part of collaboration between Beckmans and A house. Exhibited at A house Katarina and featured in the printed edition of Resumé.
-      <br><br>
-      Team: Elvin Odelholm, Maja Ringsäter, Solvej Jansson<br>
-      Head of Course: Sophia Wood<br>
-
-      
-    </div>
-  </div>
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-
-   
-
-  <div class="span-2">
-    <img src="assets/krunetroll 2 elvin odelholm.gif" alt="image">
-  </div>
-  <div class="span-2">
-    <div class="span-2">
-      <img src="assets/krunetroll tv elvin odelholm.jpg" alt="image">
-    </div>
-  </div>
- 
-  
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-  
-  
-  <div class="text-container">
-    <button class="info-button">Show Info</button>
-    <div class="text-content">
-
-      Proposed visuals for an album concept for Markus Krunegård.<br>
-    </div>
-  </div>
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-
-
-  <div class="span-2">
-    <img src="assets/collecting 100 nouns elvin odelholm.jpg" alt="image">
-  </div>
-  <div class="span-2">
-    <img src="assets/collecting show 3 elvin odelholm.jpg" alt="image">
-  </div>
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-  
-  <!-- Fourth text block -->
-  <div class="text-container">
-    <button class="info-button">Show Info</button>
-    <div class="text-content">
-      Art Direction and concept for the magazine project "Collecting: Music" at Beckmans College of Design.
-            <br>
-            <br>
-            Team: Elvin Odelholm, Adam Arinbjarnarson, Solvej Jansson
-            <br>
-            Head of Course: Stefania Malmsten
-    </div>
-  </div>
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-
-
-
-
-  <div class="span-2">
-    <video autoplay muted loop playsinline style="width: 100%; height: auto;">
-      <source src="assets/kjartan tv3 elvin odelholm.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div> 
-  <div class="span-2">
-    <video autoplay muted loop playsinline style="width: 100%; height: auto;">
-      <source src="assets/anti troll chair tv3 elvin odelholm.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div> 
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-  
-  <!-- Fourth text block -->
-  <div class="text-container">
-    <button class="info-button">Show Info</button>
-    <div class="text-content">
-      Experiments for fun in Blender and After Effects.
-    </div>
-  </div>
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-  <div class="hide-on-mobile"></div>
-
-
-
-
-
-      <div class="span-2">
-        <img src="assets/beijer bts2 elvin odelholm.jpg" alt="image">
+               <div class="image-wrapper" data-color="Blue"><img src="assets/material worlds invite elvin odelholm.jpg" alt="Blue" /></div>
+               <div class="image-wrapper" data-color="Blue"><img src="assets/material worlds letter elvin odelholm.jpg" alt="Blue" /></div>
+                  <div class="image-wrapper" data-color="Blue"><img src="assets/material worlds part1.2 elvin odelholm.jpg" alt="Blue" /></div>
+               <div class="image-wrapper" data-color="Blue"><img src="assets/material worlds part2.2 elvin odelholm.jpg" alt="Blue" /></div>
+                              <div class="image-wrapper" data-color="Blue"><img src="assets/material worlds bts1 elvin odelholm.jpg" alt="Blue" /></div>
+               <div class="image-wrapper" data-color="Blue"><img src="assets/material worlds elvin odelholm.gif" alt="Blue" /></div>
+               <div class="spacer image-wrapper" data-color="Blue"></div>
+               
+            </div>
+         </div>
       </div>
-      <div class="span-2">
-        <img src="assets/beijer bts4 elvin odelholm.jpg" alt="image">
+      <div class="mobile-footer">
+         <b>CV</b><br>
+         <div class="cv-entry"><span class="cv-label">Plattform Produktion</span><span class="cv-year">2024</span></div>
+         <div class="cv-entry"><span class="cv-label"><i>Creative Assistant Internship</i></span></div>
+         <br>
+         <div class="cv-entry"><span class="cv-label">APE_CC</span><span class="cv-year">2023</span></div>
+         <div class="cv-entry"><span class="cv-label"><i>Design Internship</i></span></div>
+         <br>
+         <div class="cv-entry"><span class="cv-label">Beckmans College of Design</span><span class="cv-year">2022–2025</span></div>
+         <div class="cv-entry"><span class="cv-label"><i>BFA Visual Communication</i></span></div>
+         <br>
+         <div class="contact">
+            <b>Contact</b><br>
+            <a href="https://www.instagram.com/elvinodelholm/" target="_blank">Instagram: @elvinodelholm</a><br>
+            <a href="mailto:elvin.odelholm@gmail.com">Mail: elvin.odelholm@gmial.com</a>
+         </div>
       </div>
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-      
-     
-      <div class="text-container">
-        <button class="info-button">Show Info</button>
-        <div class="text-content">
-          The result of a collaboration between researchers at the Beijer Institute, Svenskt Tenn and students at Beckmans College of Design. The sculpture "Lilla Samvetet" was presented at an exhibition at Svenskt Tenn as well as a <a href="https://riche.se/fenix/events/lilla-samvetet-presenteras-pa-fenix/">temporary installation at Riche Fenix.</a>
-          <br><br>
-          Team: Elvin Odelholm, Jonatan Modin<br>
-          Head of Course: Sophia Wood<br>
-          Partners: The Beijer Institute, Svenskt Tenn
-        </div>
-      </div>
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-      
-      
-      <div class="span-2">
-        <img src="assets/ad horse elvin odelholm.jpg" alt="image">
-      </div>
-      <div class="span-2">
-        <img src="assets/ad horse bts1 elvin odelholm.jpg" alt="image">
-      </div>
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-      
-      <!-- Fourth text block -->
-      <div class="text-container">
-        <button class="info-button">Show Info</button>
-        <div class="text-content">
-          "Ad Space For Rent", application work for Beckmans. <br>[<i> No animals or people harmed in the making </i>]
-        </div>
-      </div>
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-      <div class="hide-on-mobile"></div>
-
-
-      
-     
-  </main>
-  
-
-  <footer class="grid-container">
-  
-    <div class="hide-on-mobile"></div>
-
-
-      
-
-
-    
-      <div class="span-2">
-        <span class="headline">About</span>
-        <br><br>
-
-        
-        The point of this site is to give you a sense of my astonishing skills and style. I want you to see my strengths in art direction and notice my inclination toward images and photography as the pillars of my practice. You could also read an insightful quote about how I believe in establishing solid frameworks in order to make way for intuition and guilty pleasures. In return for your engagement I would wish you a nice day and then put an end to this text right about here.
-        
-        
-
-        
-        <br><br></div>
-      
-
-      <div class="footer-columns-wrapper">
-        <div class="footer-column-wide">
-          <span class="headline">Experience</span>
-          <br><br>
-          Plattform Produktion<br>
-          Creative Assistant Internship<br><br>
-          APE_CC<br>
-          Design Internship<br><br>
-          Beckmans College of Design<br>
-          BFA Visual Communication<br><br>
-        </div>
-        <div class="footer-column-narrow" style="text-align: right;">
-          <br><br>
-          2024<br><br><br>
-          2024<br><br><br>
-          2022 – 2025
-        </div>
-      </div>
-   
-      <div class="hide-on-mobile" >
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <br><br>
-        </div>
-
-     
-    <div class="contact-footer-mobile">
-      <div>
-        <span class="headline">Contact</span>
-        <br><br>
-        <span style="font-weight: normal;">elvinodelholm@gmail.com<br>+46 76 561 14 95</span>
-      </div>
-      
-
-    
-    </div>
-  </footer>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const infoButtons = document.querySelectorAll('.info-button');
-      infoButtons.forEach(button => {
-        button.addEventListener('click', function() {
-          const textContent = this.nextElementSibling;
-          if (textContent.classList.contains('active')) {
-            // Collapse with a quicker transition (0.3s)
-            textContent.style.transitionDuration = "0.3s";
-            textContent.classList.remove('active');
-            this.textContent = "Show Info";
-          } else {
-            // Expand with a slower transition (0.5s)
-            textContent.style.transitionDuration = "0.5s";
-            textContent.classList.add('active');
-            this.textContent = "Hide Info";
-          }
-        });
-      });
-    });
-  </script>
-</body>
+      <script>
+         const observerOptions = {
+           root: document.getElementById('scroll-area'),
+           threshold: 0.6
+         };
+         
+         let currentColor = '';
+         const colorIds = {
+           Red: 'text-red',
+           Blue: 'text-blue',
+           Green: 'text-green',
+           Yellow: 'text-yellow',
+           Purple: 'text-purple',
+           Orange: 'text-orange'
+         };
+         
+         const observer = new IntersectionObserver((entries) => {
+           const visible = entries.find(e => e.isIntersecting);
+           if (visible) {
+             const color = visible.target.getAttribute('data-color');
+             if (color !== currentColor) {
+               currentColor = color;
+               updateTextVisibility(color);
+             }
+           }
+         }, observerOptions);
+         
+         function updateTextVisibility(activeColor) {
+           for (const [color, id] of Object.entries(colorIds)) {
+             const el = document.getElementById(id);
+             el.classList.toggle('active', color === activeColor);
+           }
+         }
+         
+         document.querySelectorAll('.image-wrapper').forEach(wrapper => {
+           observer.observe(wrapper);
+         });
+      </script>
+   </body>
 </html>

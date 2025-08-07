@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Two Image Layout</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      padding: 20px;
+      background: #fff;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .image-wrapper {
+      flex: 1 1 45%;
+      max-width: 500px;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .image-wrapper {
+        flex-basis: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="image-wrapper">
+      <img src="assets/a house press1 elvin odelholm.jpg" alt="A House Press 1">
+    </div>
+    <div class="image-wrapper">
+      <img src="assets/a house press2 elvin odelholm.jpg" alt="A House Press 2">
+    </div>
+  </div>
+</body>
+</html>

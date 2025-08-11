@@ -34,6 +34,8 @@
          background-color: #d8d8d8;
          padding: 20px;
          border-right: 2px solid black;
+         border-top: 2px solid black;
+
          overflow-y: auto;
          }
          .text-container-1 {
@@ -115,9 +117,7 @@
          .mobile-footer p {
          margin-bottom: 10px;
          }
-         .mobile-stamp {
-         display: none;
-         }
+      
          .spacer {
          height: 10vh;
          pointer-events: none;
@@ -128,6 +128,35 @@
          background-color: black;
          opacity: 0.9;
          margin: 40px 0;
+         }
+         .desktop-stamp {
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         padding: 40px 0;
+         }
+
+         .desktop-stamp img {
+         width: 120px;   /* smaller size */
+         height: auto;
+         }
+         .portrait{
+         border: 0px solid black;
+
+         }
+
+         #spinning-portrait {
+        transition: transform 0.05s linear;
+        }
+
+         @media (min-width: 769px) {
+         .desktop-stamp {
+            padding: 35vh 0;
+         }
+         }
+
+         @media (max-width: 768px) {
+        
          }
          /* Mobile layout */
          @media (max-width: 768px) {
@@ -164,6 +193,7 @@
          width: 150px;
          height: auto;
          } 
+         
          }
          @font-face {
          font-family: 'ArialNarrow';
@@ -186,9 +216,7 @@
       <div class="mobile-header"><b>Elvin Odelholm</b><br>
          Art Director based in Stockholm.
       </div>
-      <div class="mobile-stamp">
-         <img src="assets/stamp.gif" alt="stamp" />
-      </div>
+    
       <div class="layout">
          <div class="column-fixed">
             <div class="text-container-1">
@@ -271,6 +299,8 @@
             </div>
          </div>
          <div class="scroll-area" id="scroll-area">
+            <div class="image-wrapper desktop-stamp">
+        <img id="spinning-portrait" class="portrait" src="assets/elvin.jpg" alt="stamp" />         </div>
             <div class="grid">
               <!-- Purple -->
                <div class="mobile-text"><b>Core Curriculum / Centralt Innehåll</b><br>
@@ -437,6 +467,15 @@
          document.querySelectorAll('.image-wrapper').forEach(wrapper => {
            observer.observe(wrapper);
          });
+
+          const spinImg = document.getElementById('spinning-portrait');
+        const scrollArea = document.getElementById('scroll-area');
+
+        scrollArea.addEventListener('scroll', () => {
+            const scrollTop = scrollArea.scrollTop;
+            const rotation = scrollTop * 0.2; // adjust multiplier for spin speed
+            spinImg.style.transform = `rotate(${rotation}deg)`;
+          });
       </script>
    </body>
 </html>

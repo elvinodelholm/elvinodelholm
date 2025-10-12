@@ -15,6 +15,8 @@
       html, body {
         height: 100%;
         font-family: 'ArialNarrow', sans-serif;
+        background-color: white;
+        color: black;
       }
       a {
         color: inherit;
@@ -30,10 +32,10 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        background-color: #d8d8d8;
+        background-color: white;
         padding: 20px;
-        border-right: 2px solid black;
-        border-top: 2px solid black;
+        border-right: 0px solid black;
+        border-top: 0px solid black;
         overflow-y: auto;
       }
       .text-container-1 { margin-bottom: 20px; }
@@ -65,7 +67,7 @@
       .grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 0px;
+        gap: 10px;
       }
       .image-wrapper {
         width: 100%;
@@ -83,7 +85,7 @@
         display: none;
         padding: 20px;
         margin-bottom: 25vh;
-        background-color: #d8d8d8;
+        background-color: white;
         border-bottom: 2px solid black;
       }
       .mobile-text {
@@ -94,7 +96,7 @@
       .mobile-footer {
         display: none;
         padding: 20px;
-        background-color: #d8d8d8;
+        background-color: white;
         border-top: 2px solid black;
         margin-top: 150px;
       }
@@ -103,9 +105,9 @@
       .divider {
         grid-column: 1 / -1;
         height: 2px;
-        background-color: black;
+        background-color: white;
         opacity: 0.9;
-        margin: 40px 0;
+        margin: 150px 0;
       }
       .desktop-stamp {
         display: flex;
@@ -143,7 +145,7 @@
         .layout { display: block; height: auto; }
         .column-fixed { display: none; }
         .scroll-area { padding: 10px; }
-        .grid { grid-template-columns: 1fr; gap: 0px; }
+        .grid { grid-template-columns: 1fr; gap: 10px; }
         .mobile-header {
           display: block;
           padding: 10px; /* same as .scroll-area padding on mobile */
@@ -323,7 +325,10 @@
 
       <div class="scroll-area" id="scroll-area">
         <div class="image-wrapper desktop-stamp">
-          <img id="spinning-portrait" class="portrait" src="assets/elvin.jpg" alt="stamp" />
+          <video id="spinning-portrait" class="portrait" autoplay muted loop playsinline style="width: 25vh; height: auto;">
+              <source src="assets/comp_white.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
         </div>
 
         <div class="grid">
@@ -475,9 +480,9 @@
           </div>
           <div class="image-wrapper" data-color="Red"><img src="assets/136 vanja elvin odelholm.png" alt="Red" /></div>
           <div class="image-wrapper" data-color="Red"><img src="assets/136 johannes elvin odelholm.png" alt="Red" /></div>
-          <div class="image-wrapper" data-color="Red"><img src="assets/136 scan1 elvin odelholm.jpg" alt="Red" /></div>
           <div class="image-wrapper" data-color="Red"><img src="assets/136 bts1 elvin odelholm.jpg" alt="Red" /></div>
           <div class="image-wrapper" data-color="Red"><img src="assets/136 bts3 elvin odelholm.jpg" alt="Red" /></div>
+                    <div class="image-wrapper" data-color="Red"><img src="assets/136 scan1 elvin odelholm.jpg" alt="Red" /></div>
             <div class="image-wrapper" data-color="Yellow">
             <video autoplay muted loop playsinline style="width: 100%; height: auto;">
               <source src="assets/136 invite elvin odelholm.mp4" type="video/mp4">
@@ -485,6 +490,7 @@
             </video>
           </div>
 
+                    <div class="spacer image-wrapper" data-color="Red"></div>
                     <div class="spacer image-wrapper" data-color="Red"></div>
 
 

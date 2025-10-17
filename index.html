@@ -4,7 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Elvin Odelholm Portfolio</title>
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
+     <!-- Preload -->
+    <link rel="preload" as="image" href="assets/material worlds julia elvin odelholm.jpg" />
+    <link rel="preload" as="image" href="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-1.jpg" />
+    <link rel="preload" as="image" href="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-6.jpg" />
+     <link rel="icon" type="image/png" href="assets/favicon.png" />
 
     <style>
       * {
@@ -330,8 +334,15 @@
 
       <div class="scroll-area" id="scroll-area">
         <div class="image-wrapper desktop-stamp">
-                  <img id="spinning-portrait" class="portrait" src="assets/material worlds julia elvin odelholm.jpg" alt="stamp" />
-
+        <img
+          id="spinning-portrait"
+          class="portrait"
+          src="assets/material worlds julia elvin odelholm.jpg"
+          alt="stamp"
+          fetchpriority="high"
+          loading="eager"
+          decoding="sync"
+        />
         </div>
 
         <div class="grid">

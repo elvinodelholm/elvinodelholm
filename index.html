@@ -116,7 +116,7 @@
         padding: 40px 0;
       }
       .desktop-stamp img {
-        width: 120px;
+        width: 200px;
         height: auto;
       }
       .portrait { border: 0px solid black; }
@@ -125,7 +125,10 @@
       
 
       @media (min-width: 769px) {
-        .desktop-stamp { padding: 35vh 0; }
+         .desktop-stamp {
+          padding-top: 35vh;   /* smaller space above */
+          padding-bottom: 60vh; /* larger space below */
+        }
 
          .vimeo-embed { width:95%; aspect-ratio:16/9; }
          .vimeo-embed--tall { aspect-ratio:4/3; } /* your 75% one */
@@ -154,11 +157,13 @@
         .mobile-stamp {
           display: flex;
           justify-content: center;
-          padding: 10px;
-          margin-bottom: 12vh;
+          padding-top: 8vh;
+          padding-bottom: 160vh;
         }
-        .mobile-stamp img { width: 150px; height: auto; }
-
+          .desktop-stamp {
+          padding-top: 4vh;   /* or vh if you want proportional spacing */
+          padding-bottom: 15vh; /* increase this to create more space below */
+        }
       .vimeo-embed { width:100%; aspect-ratio:16/9; }
       .vimeo-embed--tall { aspect-ratio:4/3; } /* your 75% one */
       .vimeo-embed iframe { width:100%; height:100%; border:0; display:block; 
@@ -325,10 +330,8 @@
 
       <div class="scroll-area" id="scroll-area">
         <div class="image-wrapper desktop-stamp">
-          <video id="spinning-portrait" class="portrait" autoplay muted loop playsinline style="width: 25vh; height: auto;">
-              <source src="assets/comp_white.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
+                  <img id="spinning-portrait" class="portrait" src="assets/material worlds julia elvin odelholm.jpg" alt="stamp" />
+
         </div>
 
         <div class="grid">
@@ -443,7 +446,7 @@
         
                  <!-- Yellow -->
                   
-                 
+                 <!--
           <div class="mobile-text"><b>The Little Conscience</b><br>
             <i>Art Direction</i><br><br>
               Svenskt Tenn wanted to communicate that their profits go to research. My class at Beckmans was therefore given the task of creating a scientific exhibition in their store. A friend and I teamed up and based our project on a research theme about AI as a kind of superstrong external conscience. Then we built a two-meter-tall styrofoam muscle monster sculpture of Jiminy Cricket. 
@@ -462,7 +465,7 @@
 
           <div class="divider"></div>
 
-
+-->
 
        
             <!-- Red -->

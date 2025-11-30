@@ -19,8 +19,8 @@
       html, body {
         height: 100%;
         font-family: 'ArialNarrow', sans-serif;
-        background-color: white;
-        color: black;
+        background-color: black;
+        color: rgba(255, 255, 255, 0.643);
       }
       a {
         color: inherit;
@@ -36,10 +36,10 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        background-color: white;
+        background-color: black;
         padding: 20px;
-        border-right: 0px solid black;
-        border-top: 0px solid black;
+        border-right: 0px solid rgba(255, 255, 255, 0.643);
+        border-top: 0px solid rgba(255, 255, 255, 0.643);
         overflow-y: auto;
       }
       .text-container-1 { margin-bottom: 20px; }
@@ -76,7 +76,7 @@
       .image-wrapper {
         width: 100%;
         display: flex;
-        align-items: center;
+        align-items: center;‘
         justify-content: center;
         overflow: hidden;
       }
@@ -89,8 +89,8 @@
         display: none;
         padding: 20px;
         margin-bottom: 25vh;
-        background-color: white;
-        border-bottom: 2px solid black;
+        background-color: black;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.643);
       }
       .mobile-text {
         display: none;
@@ -100,8 +100,8 @@
       .mobile-footer {
         display: none;
         padding: 20px;
-        background-color: white;
-        border-top: 2px solid black;
+        background-color: black;
+        border-top: 2px solid rgba(255, 255, 255, 0.643);
         margin-top: 150px;
       }
       .mobile-footer p { margin-bottom: 10px; }
@@ -109,7 +109,7 @@
       .divider {
         grid-column: 1 / -1;
         height: 2px;
-        background-color: white;
+        background-color: black;
         opacity: 0.9;
         margin: 150px 0;
       }
@@ -117,20 +117,20 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        padding: 40px 0;
+        padding: 0;
       }
       .desktop-stamp img {
-        width: 200px;
-        height: auto;
+        width: auto;
+        height: 40vh;
       }
-      .portrait { border: 0px solid black; }
+      .portrait { border: 0px solid white; }
       #spinning-portrait { transition: transform 0.05s linear; }
 
       
 
       @media (min-width: 769px) {
          .desktop-stamp {
-          padding-top: 35vh;   /* smaller space above */
+          padding-top: 26vh;   /* smaller space above */
           padding-bottom: 60vh; /* larger space below */
         }
 
@@ -161,12 +161,10 @@
         .mobile-stamp {
           display: flex;
           justify-content: center;
-          padding-top: 8vh;
-          padding-bottom: 160vh;
         }
           .desktop-stamp {
-          padding-top: 4vh;   /* or vh if you want proportional spacing */
-          padding-bottom: 15vh; /* increase this to create more space below */
+          padding-top: 0vh;   /* or vh if you want proportional spacing */
+          padding-bottom: 24vh; /* increase this to create more space below */
         }
       .vimeo-embed { width:100%; aspect-ratio:16/9; }
       .vimeo-embed--tall { aspect-ratio:4/3; } /* your 75% one */
@@ -237,7 +235,7 @@
             <b>Head of Course:</b> Stefania Malmsten
           </p>
 
-          <p id="text-orange"><b>Ad Space</b><br>
+          <p id="text-orange"><b>Ad Space For Rent</b><br>
             <i>Concept, Photography</i><br><br>
         Part of the application process for Beckmans College of Design was to design large-scale public typography. Since Beckmans has a background as an advertising school, I proposed a new way of generating ad revenue, writing <i>Ad Space For Rent</i> on a horse, alongside my phone number. Unfortunately, I received no calls.            <br><br>
             
@@ -257,6 +255,8 @@
             <i>Art Direction, Photography</i><br><br>
             Atelier Cru launched a collection exploring how zips and folds can make garments modifiable. I art directed and hands on created a photography campaign inspired by this idea of shapeshifting silhouettes and moving beyond the natural form.
             <br><br>
+            Featured in <a href="https://www.kaltblut-magazine.com/exocarp/" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Kaltblut Magazine</a>.
+            <br><br>
             <b>Client:</b> Atelier Cru<br>
             <b>Art Director:</b> Elvin Odelholm<br>
             <b>Photography:</b> Elvin Odelholm<br>
@@ -265,19 +265,30 @@
           </p>
 
 
-   <p id="text-pink"><b>Book Covers</b><br>
-            <i>Graphic Design</i><br><br>
-            Cover design for youth suspense novels.
-            <br><br>
-            <b>Clients:</b> Opal and Berghs<br>
-          
+          <p id="text-pink"><b>Trolls</b><br>
+                 <i>AI</i><br><br>
+Visual experiments featuring the faces of small troll dolls that would resurface in the cabinets of my childhood.            <br><br>          
           </p>
+
+             <p id="text-cyan"><b>enok.92</b><br>
+                 <i>AI</i><br><br>
+            Visual studies of my hometown streets, mixing the very much real with the very much fake.
+            <br><br>          
+          </p>
+
+              <p id="text-magenta"><b>Blender Bender</b><br>
+                 <i>3D, Experimental</i><br><br>
+            Excerpts from 3D-projects in Blender.
+            <br><br>          
+          </p>
+
 
           <p id="text-blue"><b>Material Worlds</b><br>
             <i>Art Direction, Photography, Graphic Design</i><br><br>
             Lookbook for a Beckmans Fashion Show. To highlight the materials and the concept Material Worlds, we took close-up shots of the specific garments and turned them into postcard-like landscapes. The models were then placed within these landscapes for the images in the lookbook. In addition to the landscapes, the lookbook was inspired by the size of postcards and their handwritten notes.
             <br><br>
             <b>Art Direction:</b> Elvin Odelholm<br>
+            <b>Post Production:</b> Elvin Odelholm<br>
             <b>Photography:</b> Jesper Smeding<br>
             <b>Head of Course:</b> Göran Sundberg<br>
             <b>Head of Programe:</b> Per Engsheden
@@ -326,7 +337,6 @@
             <b>Press</b><br>
             <div class="cv-entry"><span class="cv-label"><a href="https://www.kaltblut-magazine.com/exocarp/" target="_blank" style="text-decoration: underline;">Kaltblut</a></span></div>
             <div class="cv-entry"><span class="cv-label"><a href="https://www.resume.se/kommunikation/varumarke/aggklockan-fran-beckmansstudenten-ska-forhindra-mental-krasch/" target="_blank" style="text-decoration: underline;">Resumé Väggklockan</a></span></div>
-            <div class="cv-entry"><span class="cv-label"><a href="ahousepress.html" target="_blank" style="text-decoration: underline;">Resumé A house</a></span></div>
             <div class="cv-entry"><span class="cv-label"><a href="https://www.instagram.com/p/DKhP720o7gQ/?img_index=1" target="_blank" style="text-decoration: underline;">F&B Happy Scholarship</a></span></div>
             <div class="cv-entry"><span class="cv-label"><a href="https://odalisquemagazine.com/2025/11/03/atelier-cru-winter-25-26/" target="_blank" style="text-decoration: underline;">Odalisque</a></span></div>
 
@@ -363,6 +373,9 @@
              <i>Art Direction, Photography</i><br><br>
             Atelier Cru launched a collection exploring how zips and folds can make garments modifiable. I art directed and hands on created a photography campaign inspired by this idea of shapeshifting silhouettes and moving beyond the natural form.
             <br><br>
+            Featured in <a href="https://www.kaltblut-magazine.com/exocarp/" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Kaltblut Magazine</a>.
+
+            <br><br>
             <b>Client:</b> Atelier Cru<br>
             <b>Art Director:</b> Elvin Odelholm<br>
             <b>Photography:</b> Elvin Odelholm<br>
@@ -375,10 +388,12 @@
           <div class="image-wrapper" data-color="Black"><img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-2.jpg" alt="Black" /></div>
           <div class="image-wrapper" data-color="Black"><img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-6.jpg" alt="Black" /></div>
           <div class="image-wrapper" data-color="Black"><img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-1.jpg" alt="Black" /></div>
-          <div class="image-wrapper" data-color="Black"><img src="assets/cru bts1.jpg" alt="Black" /></div>
+         <!-- <div class="image-wrapper" data-color="Black"><img src="assets/cru bts1.jpg" alt="Black" /></div>
           <div class="image-wrapper" data-color="Black"><img src="assets/cru bts2.jpg" alt="Black" /></div>
-
+          -->
           <div class="divider"></div>
+
+          
 
 
                   <!-- Blue -->
@@ -387,68 +402,33 @@
             Lookbook for a Beckmans Fashion Show. To highlight the materials and the concept Material Worlds, we took close-up shots of the specific garments and turned them into postcard-like landscapes. The models were then placed within these landscapes for the images in the lookbook. In addition to the landscapes, the lookbook was inspired by the size of postcards and their handwritten notes.
             <br><br>
             <b>Art Direction:</b> Elvin Odelholm<br>
+            <b>Post Production:</b> Elvin Odelholm<br>
             <b>Photography:</b> Jesper Smeding<br>
             <b>Head of Course:</b> Göran Sundberg<br>
             <b>Head of Programe:</b> Per Engsheden
             <br> <br>
           </div>
           <div class="image-wrapper" data-color="Blue"><img src="assets/material worlds julia elvin odelholm.jpg" alt="Blue" /></div>
-          <div class="image-wrapper" data-color="Blue"><img src="assets/material worlds letter elvin odelholm.jpg" alt="Blue" /></div>
-          <div class="image-wrapper" data-color="Blue"><img src="assets/material worlds bts2 elvin odelholm.jpg" alt="Blue" /></div>
           <div class="image-wrapper" data-color="Blue"><img src="assets/material worlds arvid elvin odelholm.jpg" alt="Blue" /></div>
 
 
                     <div class="divider"></div>
 
-
-
-
-
-               <!-- Yellow -->
-                  
-                 
-          <div class="mobile-text"><b>The Little Conscience</b><br>
-            <i>Art Direction</i><br><br>
-              Svenskt Tenn wanted to communicate that their profits go to research. My class at Beckmans was therefore given the task of creating a scientific exhibition in their store. A friend and I teamed up and based our project on a research theme about AI as a kind of superstrong external conscience. Then we built a two-meter-tall styrofoam muscle monster sculpture of Jiminy Cricket. 
-              <br><br>
-              The piece was later exhibited at the Royal Swedish Academy of Sciences and at Riche Fenix in Stockholm.             <br><br>
-            <b>Partner:</b> Svenskt Tenn, The Beijer Foundation<br>
-            <b>Team:</b> Elvin Odelholm, Jonatan Modin<br>
-            <b>Project Lead:</b> Sophia Wood
-
-            <br> <br>
-          </div>
-         
-
-          <div class="image-wrapper" data-color="Yellow"><img src="assets/beijer bts8 elvin odelholm.jpg" alt="Yellow" /></div>
-          <div class="image-wrapper" data-color="Yellow"><img src="assets/beijer bts7 elvin odelholm.jpg" alt="Yellow" /></div>
-
-          <div class="divider"></div>
-
-       
-
-          <!-- Green -->
-          <div class="mobile-text"><b>Collecting Music</b><br>
-            <i>Art Direction, Graphic Design</i><br><br>
-            We were assigned to create magazines about music. My group decided to use collecting and statistics as our angle. I made a centrefold poster illustrating the 100 most common nouns in the lyrics of the 100 most streamed songs. 
+  
+                 <!-- Pink -->
+          <div class="mobile-text"><b>Trolls</b><br>
+             <i>AI</i><br><br>
+            Visual experiments featuring the faces of small troll dolls that would resurface in the cabinets of my childhood.            <br><br>          
             <br><br>
-            <b>Team:</b> Elvin Odelholm, Adam Arinbjarnarson, Solvej Jansson<br>
-            <b>Head of Course:</b> Stefania Malmsten
-            <br> <br>
           </div>
-          <!--OBS F ta concrete-fotona och ev solvejs smycken, det handlar om vibe-->
-          <div class="image-wrapper" data-color="Green"><img src="assets/collecting concrete-3 elvin odelholm.jpg" alt="Green" /></div>
-          <div class="image-wrapper" data-color="Green"><img src="assets/collecting concrete-4 elvin odelholm.jpg" alt="Green" /></div>
-
-
-         
-
+          <div class="image-wrapper" data-color="Pink"><img src="assets/enok-fly-elvin-odelholm.jpg" alt="Pink" /></div>
+          <div class="image-wrapper" data-color="Pink"><img src="assets/enok-milk1-elvin-odelholm.jpg" alt="Pink" /></div>
           <div class="divider"></div>
 
-       
 
 
-                    
+
+
           <!-- Purple -->
           <div class="mobile-text"><b>Core Curriculum / Centralt Innehåll</b><br>
             <i>Art Direction, Photography, Graphic Design</i><br><br>
@@ -468,29 +448,55 @@
           <div class="divider"></div>
 
 
+       
+     <!-- Cyan -->
+          <div class="mobile-text"><b>enok.92</b><br>
+             <i>AI</i><br><br>
+              Visual studies of my hometown streets, mixing the very much real with the very much fake.
 
-        
-        <!-- Pink -->
-         <!--
-          <div class="mobile-text"><b>Book Covers</b><br>
-             <i>Graphic Design</i><br><br>
-            Cover design for youth suspense novels.<br><br>
-            <b>Clients:</b> Opal and Berghs <br>
+            <br><br>
+          </div>
+          <div class="image-wrapper" data-color="Cyan"><img src="assets/enok-carface-elvin-odelholm.jpg" alt="Cyan" /></div>
+          <div class="image-wrapper" data-color="Cyan"><img src="assets/enok-crows-elvin-odelholm.jpg" alt="Cyan" /></div>
+          <div class="divider"></div>
+
+
+             <!-- Green -->
+          <div class="mobile-text"><b>Collecting Music</b><br>
+            <i>Art Direction, Graphic Design</i><br><br>
+            We were assigned to create magazines about music. My group decided to use collecting and statistics as our angle. I made a centrefold poster illustrating the 100 most common nouns in the lyrics of the 100 most streamed songs. 
+            <br><br>
+            <b>Team:</b> Elvin Odelholm, Adam Arinbjarnarson, Solvej Jansson<br>
+            <b>Head of Course:</b> Stefania Malmsten
             <br> <br>
           </div>
-          <div class="image-wrapper" data-color="Pink"><img src="assets/omslag fagelsången.jpg" alt="Pink" /></div>
-          <div class="image-wrapper" data-color="Pink"><img src="assets/omslag mordarens skugga.jpg" alt="Pink" /></div>
+          <!--OBS F ta concrete-fotona och ev solvejs smycken, det handlar om vibe-->
+          <div class="image-wrapper" data-color="Green"><img src="assets/collecting concrete-3 elvin odelholm.jpg" alt="Green" /></div>
+          <div class="image-wrapper" data-color="Green"><img src="assets/collecting concrete-4 elvin odelholm.jpg" alt="Green" /></div>
+          <div class="divider"></div>
+
+       
+
+               <!-- Yellow -->
+          <div class="mobile-text"><b>The Little Conscience</b><br>
+            <i>Art Direction</i><br><br>
+              Svenskt Tenn wanted to communicate that their profits go to research. My class at Beckmans was therefore given the task of creating a scientific exhibition in their store. A friend and I teamed up and based our project on a research theme about AI as a kind of superstrong external conscience. Then we built a two-meter-tall styrofoam muscle monster sculpture of Jiminy Cricket. 
+              <br><br>
+              The piece was later exhibited at the Royal Swedish Academy of Sciences and at Riche Fenix in Stockholm.             <br><br>
+            <b>Partner:</b> Svenskt Tenn, The Beijer Foundation<br>
+            <b>Team:</b> Elvin Odelholm, Jonatan Modin<br>
+            <b>Project Lead:</b> Sophia Wood
+            <br> <br>
+          </div>
+                    <div class="image-wrapper" data-color="Yellow"><img src="assets/beijer bts4 elvin odelholm.jpg" alt="Yellow" /></div>
+
+          <div class="image-wrapper" data-color="Yellow"><img src="assets/beijer bts8 elvin odelholm.jpg" alt="Yellow" /></div>
+                    <div class="image-wrapper" data-color="Yellow"><img src="assets/beijer bts7 elvin odelholm.jpg" alt="Yellow" /></div>
+          <div class="image-wrapper" data-color="Yellow"><img src="assets/beijer svenskt tenn elvin odelholm.jpg" alt="Yellow" /></div>
 
           <div class="divider"></div>
 
--->
 
-        
-            
-
-
-
-       
             <!-- Red -->
           <div class="mobile-text"><b>13:6 Collaborations</b><br>
             <i>Art Direction, Photography, Graphic Design</i><br><br>
@@ -504,24 +510,20 @@
             <b>Collaborating Brands:</b> Arket, Asket, & Other Stories, Rave Review, Remake, Weekday</b>
             <br>
           </div>
-          <div class="image-wrapper" data-color="Red"><img src="assets/136 vanja elvin odelholm.png" alt="Red" /></div>
-          <div class="image-wrapper" data-color="Red"><img src="assets/136 johannes elvin odelholm.png" alt="Red" /></div>
-                  <div class="image-wrapper" data-color="Red"><img src="assets/136 scan1 elvin odelholm.jpg" alt="Red" /></div>
+          <div class="image-wrapper" data-color="Red"><img src="assets/136 gustav elvin odelholm.png" alt="Red" /></div>
             <div class="image-wrapper" data-color="Red">
             <video autoplay muted loop playsinline style="width: 100%; height: auto;">
               <source src="assets/136 invite elvin odelholm.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
           </div>
-           <div class="image-wrapper" data-color="Red"><img src="assets/136 bts5 elvin odelholm.jpg" alt="Red" /></div>
-          <div class="image-wrapper" data-color="Red"><img src="assets/136 bts3 elvin odelholm.jpg" alt="Red" /></div>
-           
+        
 
           <div class="divider"></div>
 
 
   <!-- Orange -->
-          <div class="mobile-text"><b>Ad Space</b><br>
+          <div class="mobile-text"><b>Ad Space For Rent</b><br>
             <i>Concept, Photography</i><br><br>
             Part of the application process for Beckmans College of Design was to design large-scale public typography. Since Beckmans has a background as an advertising school, I proposed a new way of generating ad revenue, writing <i>Ad Space For Rent</i> on a horse, alongside my phone number. Unfortunately, I received no calls.            <br><br>
             <br>    
@@ -571,7 +573,6 @@
       <b>Press</b><br>
       <div class="cv-entry"><span class="cv-label"><a href="https://www.kaltblut-magazine.com/exocarp/" target="_blank" style="text-decoration: underline;">Kaltblut</a></span></div>
       <div class="cv-entry"><span class="cv-label"><a href="https://www.resume.se/kommunikation/varumarke/aggklockan-fran-beckmansstudenten-ska-forhindra-mental-krasch/" target="_blank" style="text-decoration: underline;">Resumé Väggklockan</a></span></div>
-      <div class="cv-entry"><span class="cv-label"><a href="ahousepress.html" target="_blank" style="text-decoration: underline;">Resumé A house</a></span></div>
       <div class="cv-entry"><span class="cv-label"><a href="https://www.instagram.com/p/DKhP720o7gQ/?img_index=1" target="_blank" style="text-decoration: underline;">F&B Happy Scholarship</a></span></div>
       <div class="cv-entry"><span class="cv-label"><a href="https://odalisquemagazine.com/2025/11/03/atelier-cru-winter-25-26/" target="_blank" style="text-decoration: underline;">Odalisque</a></span></div>
 
@@ -601,6 +602,8 @@
         Purple: 'text-purple',
         Orange: 'text-orange',
         Pink: 'text-pink',
+        Cyan: 'text-cyan',
+        Magenta: 'text-magenta',
         Black: 'text-black'
       };
 

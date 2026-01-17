@@ -1,0 +1,133 @@
+/* styles.css */
+
+/* ======================================================
+   CONTROL PANEL – adjust only these values
+====================================================== */
+:root{
+  /* Base phone size (desktop target) */
+  --phone-width: 380px;
+
+  /* Responsive scale (auto on small screens) */
+  --phone-scale: 1;
+
+  /* Screen position inside frame (percent of phone size) */
+  --screen-left: 10.8%;
+  --screen-top: 18.6%;
+  --screen-width: 78.4%;
+  --screen-height: 63.2%;
+
+  /* Screen + content styling */
+  --screen-bg: #ffffff;
+  --shot-padding: 14px;
+  --shot-gap: 18px;
+
+  /* Safari UI spacing (scales with phone width) */
+  --safari-header: calc(var(--phone-width) * 0.14);
+
+  /* Space after last image */
+  --scroll-end-space: 48px;
+}
+
+/* ======================================================
+   Base
+====================================================== */
+*{ box-sizing: border-box; }
+html, body{ height: 100%; }
+
+body{
+  margin: 0;
+  background: #cbcbcb;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ======================================================
+   Layout (stable center)
+====================================================== */
+.stage{
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+
+  /* Prevent accidental horizontal scroll on mobile */
+  overflow-x: hidden;
+}
+
+/* ======================================================
+   Phone (scaled as a single unit)
+====================================================== */
+.phone{
+  position: relative;
+  width: var(--phone-width);
+  margin: 0;
+
+  /* Keeps proportions identical on mobile */
+  transform: scale(var(--phone-scale));
+  transform-origin: center;
+}
+
+/* iPhone frame (always on top) */
+.phone__frame{
+  position: relative;
+  width: 100%;
+  height: auto;
+  display: block;
+  z-index: 2;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Screen area inside the phone */
+.phone__viewport{
+  position: absolute;
+  left: var(--screen-left);
+  top: var(--screen-top);
+  width: var(--screen-width);
+  height: var(--screen-height);
+
+  background: var(--screen-bg);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+
+  /* Start content below Safari header */
+  padding-top: var(--safari-header);
+
+  z-index: 1;
+}
+
+/* ======================================================
+   Scroll content
+====================================================== */
+.phone__content{
+  display: grid;
+  justify-items: center;
+  gap: var(--shot-gap);
+
+  padding: var(--shot-padding);
+  padding-bottom: calc(var(--shot-padding) + var(--scroll-end-space));
+}
+
+/* Individual images */
+.shot{
+  width: 99%;
+  height: auto;
+  display: block;
+  background: #ffffff;
+}
+
+/* ======================================================
+   Responsive scaling
+   (adjust the scale values if you want it smaller/larger)
+====================================================== */
+@media (max-width: 480px){
+  :root{ --phone-scale: 0.80; }
+}
+
+@media (max-width: 390px){
+  :root{ --phone-scale: 0.72; }
+}
+
+@media (max-width: 340px){
+  :root{ --phone-scale: 0.66; }
+}

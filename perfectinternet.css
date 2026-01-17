@@ -4,11 +4,8 @@
    CONTROL PANEL – adjust only these values
 ====================================================== */
 :root{
-  /* Base phone size (desktop target) */
-  --phone-width: 380px;
-
-  /* Responsive scale (auto on small screens) */
-  --phone-scale: 1;
+  /* Desktop target size */
+  --phone-max-width: 380px;
 
   /* Screen position inside frame (percent of phone size) */
   --screen-left: 10.8%;
@@ -41,29 +38,27 @@ body{
 }
 
 /* ======================================================
-   Layout (stable center)
+   Layout (true center)
 ====================================================== */
 .stage{
-  min-height: 100vh;
+  min-height: 100svh;      /* bättre på mobil än 100vh */
   display: grid;
   place-items: center;
   padding: 24px;
-
-  /* Prevent accidental horizontal scroll on mobile */
   overflow-x: hidden;
 }
 
 /* ======================================================
-   Phone (scaled as a single unit)
+   Phone (RESPONSIVE WIDTH, no transform)
 ====================================================== */
 .phone{
   position: relative;
-  width: var(--phone-width);
-  margin: 0;
 
-  /* Keeps proportions identical on mobile */
-  transform: scale(var(--phone-scale));
-  transform-origin: center;
+  /* NEW: responsive width that always fits viewport (minus padding) */
+  --phone-width: min(var(--phone-max-width), calc(100vw - 48px));
+  width: var(--phone-width);
+
+  margin: 0;
 }
 
 /* iPhone frame (always on top) */
@@ -90,8 +85,8 @@ body{
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 
-  /* Start content below Safari header */
-  padding-top: var(--safari-header);
+  /* Start content below Safari header (depends on responsive phone width) */
+  padding-top: calc(var(--phone-width) * 0.14);
 
   z-index: 1;
 }
@@ -108,26 +103,9 @@ body{
   padding-bottom: calc(var(--shot-padding) + var(--scroll-end-space));
 }
 
-/* Individual images */
 .shot{
   width: 99%;
   height: auto;
   display: block;
   background: #ffffff;
-}
-
-/* ======================================================
-   Responsive scaling
-   (adjust the scale values if you want it smaller/larger)
-====================================================== */
-@media (max-width: 480px){
-  :root{ --phone-scale: 0.80; }
-}
-
-@media (max-width: 390px){
-  :root{ --phone-scale: 0.72; }
-}
-
-@media (max-width: 340px){
-  :root{ --phone-scale: 0.66; }
 }

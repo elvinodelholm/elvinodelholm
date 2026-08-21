@@ -671,7 +671,7 @@ body.about-open .meta { display: block; }
 
       <!-- OFF-WHITE™ LAB -->
       <div class="image-wrapper" data-project="off-white-lab">
-        <video autoplay muted loop playsinline>
+        <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
           <source src="assets/off white signs elvin odelholm.mp4" type="video/mp4" />
         </video>
       </div>
@@ -860,6 +860,27 @@ document.querySelectorAll('.image-wrapper[data-project]').forEach(tile => {
   observer.observe(tile);
 });
 
+// safari refuses autoplay more often than chrome does, and with three
+// copies of the page it would otherwise run every clip at once. start
+// them when they come into view, pause them when they leave, and set
+// muted as a property since that is what safari actually checks
+const videoObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    const video = entry.target;
+    if (entry.isIntersecting) {
+      const playing = video.play();
+      if (playing) playing.catch(() => {});
+    } else {
+      video.pause();
+    }
+  });
+}, { threshold: 0.25 });
+
+document.querySelectorAll('.image-wrapper video').forEach(video => {
+  video.muted = true;
+  videoObserver.observe(video);
+});
+
 // the loop, and the stamp that spins with it
 const SPIN = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 0.2;
 const MOBILE = window.matchMedia('(max-width: 768px)');
@@ -870,7 +891,15 @@ let unitHeight = 0;
 let origin = 0;
 let lastTop = 0;
 let angle = 0;
-let seatedAt = 0;
+
+// true as soon as the visitor touches the page themselves. everything
+// that re-seats the page checks this: before the first wheel, swipe or
+// key press we are free to snap back to the stamp, after it we are not
+let userHasScrolled = false;
+['wheel', 'touchstart', 'keydown', 'pointerdown'].forEach(type => {
+  window.addEventListener(type, () => { userHasScrolled = true; },
+    { passive: true, once: true });
+});
 
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
@@ -909,11 +938,12 @@ function seat(keepPosition) {
 
   setTop(origin + unitHeight + unitHeight * fraction);
   lastTop = getTop();
-  seatedAt = lastTop;
 }
 
 function normalize() {
-  if (!unitHeight) return;
+  // nothing to wrap around before the visitor has moved, and running
+  // this on a half-loaded page is what used to drag it off the stamp
+  if (!unitHeight || !userHasScrolled) return;
   const top = getTop();
 
   if (top >= origin + unitHeight * 2) {
@@ -941,11 +971,23 @@ window.addEventListener('scroll', onScroll);
 
 seat(false);
 
-/* images have no height until they load, so measure again once
-   they do. if you have not scrolled yet, go back to the stamp;
-   if you have, hold your place instead of yanking you to the top */
+/* an image has no height until it loads, so the page keeps growing
+   for a while after the script runs. re-seat on every one of them,
+   which pins us to the stamp right up until the visitor scrolls */
+function reseatIfUntouched() {
+  if (!userHasScrolled) seat(false);
+}
+
+scrollArea.querySelectorAll('img').forEach(img => {
+  if (!img.complete) {
+    img.addEventListener('load', reseatIfUntouched);
+    img.addEventListener('error', reseatIfUntouched);
+  }
+});
+
 window.addEventListener('load', () => {
-  seat(Math.abs(getTop() - seatedAt) > 2);
+  reseatIfUntouched();
+  setTimeout(reseatIfUntouched, 250);   // last word, after fonts settle
 });
 
 window.addEventListener('resize', () => seat(true));

@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Portfolio</title>
+<title>Elvin Odelholm Portfolio</title>
 <link rel="icon" type="image/png" href="assets/favicon.png" />
+
+<!-- the stamp is the first thing anyone sees, so it jumps the queue -->
+<link rel="preload" as="image" href="assets/title-card-01.png" />
 
 <!--
   YOUR CONTENT GOES IN 5 PLACES. Search for "EDIT".
@@ -29,6 +32,14 @@
       ...one per image, then these two lines:
       <div class="mobile-text" data-copy-for="my-slug"></div>
       <div class="divider"></div>
+
+  SEVERAL IMAGE PAIRS FOR ONE PROJECT — wrap them like this and the
+  script adds a column of dots to switch between them:
+
+      <div class="pair-set" data-project="my-slug">
+        <div class="pair"> two image-wrappers </div>
+        <div class="pair"> two image-wrappers </div>
+      </div>
 
   Images and fonts go in an "assets" folder next to this file.
   A tile with no <img> in it shows a grey box, so you can lay out first.
@@ -74,6 +85,9 @@
 
   --title-offset: 3em;
   --line-height: 1.35;
+
+  /* only for the ○ ● marks — the text keeps arial narrow */
+  --symbol-font: Arial, Helvetica, "Segoe UI Symbol", "DejaVu Sans", sans-serif;
 }
 
 /* ------- machinery from here down, you can ignore it -------- */
@@ -92,6 +106,18 @@ html, body {
 a { color: inherit; text-decoration: none; }
 
 .text-link { text-decoration: underline; }
+
+/* the ○ ● in front of a button label. arial narrow has neither glyph,
+   so without a font of its own the browser fetches each from whatever
+   fallback it likes — and not necessarily the same one for both, which
+   shifts the label when the mark changes. the fixed box holds the
+   position; only this span changes font, the words next to it do not */
+.mark {
+  font-family: var(--symbol-font);
+  display: inline-block;
+  width: 1em;
+  text-align: center;
+}
 
 /* one track: the text pane floats on top, it is not a column */
 .layout {
@@ -171,6 +197,7 @@ a { color: inherit; text-decoration: none; }
 
   cursor: pointer;
 }
+.about-toggle:hover { color: #fff; }
 .about-toggle:focus-visible { outline: 1px solid var(--fg); }
 
 /* the floating text pane, top left */
@@ -246,6 +273,57 @@ body.about-open .meta { display: block; }
   gap: var(--gap);
 }
 
+/* a project with more than one set of images. each .pair is a row of
+   two tiles; only the active one is shown, and the script adds the
+   column of dots that switches between them */
+.pair-set {
+  grid-column: 1 / -1;
+  position: relative;
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+}
+.pair:not(.pair-active) { display: none; }
+
+.pair-dots {
+  position: absolute;
+  top: 0;
+  left: calc(100% + var(--gap));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.pair-dot {
+  font: inherit;
+  line-height: 1;
+  color: var(--fg);
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  /* arial narrow has neither circle, so the browser used to fetch them
+     glyph by glyph from whatever fallback it liked — and it does not
+     have to pick the same font for ○ as for ●. two fonts means two
+     widths and two side bearings, which is what made the column jump.
+     naming a font that carries both settles it. */
+  font-family: var(--symbol-font);
+
+  /* and the box stays put regardless of what is drawn inside it */
+  display: inline-block;
+  width: 1em;
+  text-align: center;
+}
+.pair-dot:hover { color: #fff; }
+.pair-dot:focus-visible { outline: 1px solid var(--fg); }
+
 .image-wrapper:empty {
   aspect-ratio: 4 / 5;
   background-color: #141414;
@@ -319,6 +397,11 @@ body.about-open .meta { display: block; }
   .scroll-area { padding: 10px; }
   .grid { grid-template-columns: 1fr; }
 
+  /* no switching on mobile: one column, every pair shown in turn */
+  .pair { grid-template-columns: 1fr; }
+  .pair:not(.pair-active) { display: grid; }
+  .pair-dots { display: none; }
+
   .mobile-header {
     display: flex;
     align-items: flex-start;
@@ -358,6 +441,7 @@ body.about-open .meta { display: block; }
     text-decoration: none;
     cursor: pointer;
   }
+  .info-toggle:hover { color: #fff; }
 
   body.about-open { overflow: hidden; }
 
@@ -386,7 +470,7 @@ body.about-open .meta { display: block; }
 <div class="mobile-header" id="mobile-header">
   <div class="mobile-identity"></div>
   <button type="button" class="about-toggle" aria-expanded="false">
-    ○ About
+    <span class="mark">○</span> About
   </button>
 </div>
 
@@ -399,11 +483,11 @@ body.about-open .meta { display: block; }
 <div class="about-corner">
   <div class="corner-buttons">
     <button type="button" id="pane-toggle" class="pane-toggle" aria-pressed="true">
-      ○ Info
+      <span class="mark">○</span> Info
     </button>
 
     <button type="button" class="about-toggle" aria-expanded="false">
-      ○ About
+      <span class="mark">○</span> About
     </button>
   </div>
 
@@ -568,6 +652,22 @@ body.about-open .meta { display: block; }
         </div>
       </div>
 
+      <div class="project-copy" data-project="material-worlds">
+        <div class="copy-head">
+          <b>MATERIAL WORLDS</b><br />
+          <i>Lookbook Photography</i>
+        </div>
+        <div class="copy-body">
+          Lookbook photography for Material Worlds, a fashion show by students at Beckmans College of Design. To highlight the diverse materials in each look, every model was placed within a landscape constructed out of materials featured in their garments.
+          <div class="copy-credits">
+            <b>Art Direction:</b> Elvin Odelholm<br />
+            <b>Photography:</b> Elvin Odelholm and Jesper Smeding<br />
+            <b>Head of Course:</b> Göran Sundberg<br />
+            <b>Head of Program:</b> Pär Engsheden
+          </div>
+        </div>
+      </div>
+
       <div class="project-copy" data-project="ad-space">
         <div class="copy-head">
           <b>AD-SPACE FOR RENT</b><br />
@@ -611,21 +711,6 @@ body.about-open .meta { display: block; }
         </div>
       </div>
 
-      <div class="project-copy" data-project="material-worlds">
-        <div class="copy-head">
-          <b>MATERIAL WORLDS</b><br />
-          <i>Lookbook Photography</i>
-        </div>
-        <div class="copy-body">
-          Lookbook photography for Material Worlds, a fashion show by students at Beckmans College of Design. To highlight the diverse materials in each look, every model was placed within a landscape constructed out of materials featured in their garments.
-          <div class="copy-credits">
-            <b>Art Direction:</b> Elvin Odelholm<br />
-            <b>Photography:</b> Elvin Odelholm and Jesper Smeding<br />
-            <b>Head of Course:</b> Göran Sundberg<br />
-            <b>Head of Program:</b> Pär Engsheden
-          </div>
-        </div>
-      </div>
     </div>
 
   </div>
@@ -637,19 +722,54 @@ body.about-open .meta { display: block; }
 
     <!-- the portrait that spins as you scroll -->
     <div class="image-wrapper stamp">
-      <img class="stamp-image" src="assets/title-card-01.png" alt="" />
+      <img class="stamp-image" src="assets/title-card-01.png" alt=""
+           fetchpriority="high" decoding="async" />
     </div>
 
     <!-- EDIT 4 — IMAGES. Slug must match a text block in EDIT 3. -->
     <div class="grid">
 
       <!-- CORE CURRICULUM -->
-      <div class="image-wrapper" data-project="core-curriculum">
-        <img src="assets/centralt innehall mjolk3 elvin odelholm.jpg" alt="" />
-      </div>
+      <div class="pair-set" data-project="core-curriculum">
 
-      <div class="image-wrapper" data-project="core-curriculum">
-        <img src="assets/centralt innehall mjolk4 elvin odelholm.jpg" alt="" />
+        <div class="pair">
+          <div class="image-wrapper" data-project="core-curriculum">
+            <img src="assets/centralt innehall mjolk3 elvin odelholm.jpg" alt="" />
+          </div>
+          <div class="image-wrapper" data-project="core-curriculum">
+            <img src="assets/centralt innehall mjolk4 elvin odelholm.jpg" alt="" />
+          </div>
+        </div>
+
+        <div class="pair">
+          <div class="image-wrapper" data-project="core-curriculum">
+            <img src="assets/centralt innehall punch1 elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+          <div class="image-wrapper" data-project="core-curriculum">
+            <img src="assets/centralt innehall punch2 elvin odelholm.jpg.jpg" alt="" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="pair">
+          <div class="image-wrapper" data-project="core-curriculum">
+            <img src="assets/centralt innehall bag1 elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+          <div class="image-wrapper" data-project="core-curriculum">
+            <img src="assets/centralt innehall bag2 elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+        </div>
+
+         <div class="pair">
+          <div class="image-wrapper" data-project="core-curriculum">
+            <img src="assets/centralt innehall bok3 elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+          <div class="image-wrapper" data-project="core-curriculum">
+            <img src="assets/centralt innehall bok2 elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+        </div>
+
+      
+
       </div>
 
       <div class="mobile-text" data-copy-for="core-curriculum"></div>
@@ -657,12 +777,35 @@ body.about-open .meta { display: block; }
       <div class="divider"></div>
 
       <!-- ATELIER CRU -->
-      <div class="image-wrapper" data-project="atelier-cru">
-        <img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-4.jpg" alt="" />
-      </div>
+      <div class="pair-set" data-project="atelier-cru">
 
-      <div class="image-wrapper" data-project="atelier-cru">
-        <img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-5.jpg" alt="" />
+        <div class="pair">
+          <div class="image-wrapper" data-project="atelier-cru">
+            <img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-4.jpg" alt="" />
+          </div>
+          <div class="image-wrapper" data-project="atelier-cru">
+            <img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-5.jpg" alt="" />
+          </div>
+        </div>
+
+         <div class="pair">
+          <div class="image-wrapper" data-project="atelier-cru">
+            <img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-3.jpg" alt="" loading="lazy" />
+          </div>
+          <div class="image-wrapper" data-project="atelier-cru">
+            <img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-6.jpg" alt="" loading="lazy" />
+          </div>
+        </div>
+
+         <div class="pair">
+          <div class="image-wrapper" data-project="atelier-cru">
+            <img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-2.jpg" alt="" loading="lazy" />
+          </div>
+          <div class="image-wrapper" data-project="atelier-cru">
+            <img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-1.jpg" alt="" loading="lazy" />
+          </div>
+        </div>
+
       </div>
 
       <div class="mobile-text" data-copy-for="atelier-cru"></div>
@@ -670,14 +813,30 @@ body.about-open .meta { display: block; }
       <div class="divider"></div>
 
       <!-- OFF-WHITE™ LAB -->
-      <div class="image-wrapper" data-project="off-white-lab">
-        <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
-          <source src="assets/off white signs elvin odelholm.mp4" type="video/mp4" />
-        </video>
-      </div>
+      <div class="pair-set" data-project="off-white-lab">
 
-      <div class="image-wrapper" data-project="off-white-lab">
-        <img src="assets/off white 350 spec sheet elvin odelholm.jpg" alt="" />
+        <div class="pair">
+          <div class="image-wrapper" data-project="off-white-lab">
+            <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
+              <source src="assets/off white signs elvin odelholm.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div class="image-wrapper" data-project="off-white-lab">
+            <img src="assets/off white 350 spec sheet elvin odelholm.jpg" alt="" />
+          </div>
+        </div>
+
+        <div class="pair">
+          <div class="image-wrapper" data-project="off-white-lab">
+            <img src="assets/off white spec sheet elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+          <div class="image-wrapper" data-project="off-white-lab">
+            <video autoplay muted loop playsinline webkit-playsinline preload="metadata">
+              <source src="assets/off white 360 turntable elvin odelholm.mp4" type="video/mp4" />
+            </video>
+          </div>
+        </div>
+
       </div>
 
       <div class="mobile-text" data-copy-for="off-white-lab"></div>
@@ -685,12 +844,35 @@ body.about-open .meta { display: block; }
       <div class="divider"></div>
 
       <!-- BOUND 2 -->
-      <div class="image-wrapper" data-project="bound-2">
-        <img src="assets/bound 2 01-black dog-V09 elvin odelholm.jpg" alt="" />
-      </div>
+      <div class="pair-set" data-project="bound-2">
 
-      <div class="image-wrapper" data-project="bound-2">
-        <img src="assets/bound 2 09-airpods-V04 elvin odelholm.jpg" alt="" />
+        <div class="pair">
+          <div class="image-wrapper" data-project="bound-2">
+            <img src="assets/bound 2 03-rabbit-V05 elvin odelholm.jpg" alt="" />
+          </div>
+          <div class="image-wrapper" data-project="bound-2">
+            <img src="assets/bound 2 09-airpods-V04 elvin odelholm.jpg" alt="" />
+          </div>
+        </div>
+
+          <div class="pair">
+          <div class="image-wrapper" data-project="bound-2">
+            <img src="assets/bound 2 06-crucifix-V16 elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+          <div class="image-wrapper" data-project="bound-2">
+            <img src="assets/bound 2 07-horse-V03 elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+        </div>
+
+         <div class="pair">
+          <div class="image-wrapper" data-project="bound-2">
+            <img src="assets/bound 2 10-dove-V07 elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+          <div class="image-wrapper" data-project="bound-2">
+            <img src="assets/bound 2 02-candle-V02 elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+        </div>
+
       </div>
 
       <div class="mobile-text" data-copy-for="bound-2"></div>
@@ -698,73 +880,107 @@ body.about-open .meta { display: block; }
       <div class="divider"></div>
 
       <!-- JIMINY CRICKET -->
-      <div class="image-wrapper" data-project="jiminy-cricket">
-        <img src="assets/beijer bts8 elvin odelholm.jpg" alt="" />
-      </div>
+      <div class="pair-set" data-project="jiminy-cricket">
 
-      <div class="image-wrapper" data-project="jiminy-cricket">
-        <img src="assets/beijer svenskt tenn elvin odelholm.jpg" alt="" />
+        <div class="pair">
+          <div class="image-wrapper" data-project="jiminy-cricket">
+            <img src="assets/beijer bts8 elvin odelholm.jpg" alt="" />
+          </div>
+          <div class="image-wrapper" data-project="jiminy-cricket">
+            <img src="assets/beijer svenskt tenn elvin odelholm.jpg" alt="" />
+          </div>
+        </div>
+
+        <div class="pair">
+          <div class="image-wrapper" data-project="jiminy-cricket">
+            <img src="assets/beijer bts4 elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+          <div class="image-wrapper" data-project="jiminy-cricket">
+            <img src="assets/beijer bts11 elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+        </div>
+
       </div>
 
       <div class="mobile-text" data-copy-for="jiminy-cricket"></div>
 
       <div class="divider"></div>
 
-      <!-- AD-SPACE FOR RENT -->
-      <div class="image-wrapper" data-project="ad-space">
-        <img src="assets/ad horse bts1 elvin odelholm.jpg" alt="" />
+      <!-- MATERIAL WORLDS -->
+      <div class="pair-set" data-project="material-worlds">
+
+        <div class="pair">
+          <div class="image-wrapper" data-project="material-worlds">
+            <img src="assets/material worlds arvid elvin odelholm.jpg" alt="" />
+          </div>
+          <div class="image-wrapper" data-project="material-worlds">
+            <img src="assets/material worlds julia elvin odelholm.jpg" alt="" />
+          </div>
+        </div>
+
+        <div class="pair">
+          <div class="image-wrapper" data-project="material-worlds">
+            <img src="assets/material worlds justin elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+          <div class="image-wrapper" data-project="material-worlds">
+            <img src="assets/material worlds nicke elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+        </div>
+
+        <div class="pair">
+          <div class="image-wrapper" data-project="material-worlds">
+            <img src="assets/material worlds mar elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+          <div class="image-wrapper" data-project="material-worlds">
+            <img src="assets/material worlds print1 elvin odelholm.jpg" alt="" loading="lazy" />
+          </div>
+        </div>
+
       </div>
 
-      <div class="image-wrapper" data-project="ad-space">
-        <img src="assets/ad horse elvin odelholm.jpg" alt="" />
-      </div>
+      <div class="mobile-text" data-copy-for="material-worlds"></div>
+
+      <div class="divider"></div>
+
+      <!-- AD-SPACE FOR RENT -->
+        <div class="image-wrapper" data-project="ad-space">
+          <img src="assets/ad horse bts1 elvin odelholm.jpg" alt="" />
+        </div>
+        <div class="image-wrapper" data-project="ad-space">
+          <img src="assets/ad horse elvin odelholm.jpg" alt="" />
+        </div>
 
       <div class="mobile-text" data-copy-for="ad-space"></div>
 
       <div class="divider"></div>
 
       <!-- MICRO-SHORTS -->
-      <div class="image-wrapper" data-project="micro-shorts">
-        <iframe src="https://player.vimeo.com/video/1114202441?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
-                title="Motorcross" loading="lazy"
-                allow="autoplay; fullscreen; picture-in-picture"
-                referrerpolicy="strict-origin-when-cross-origin"></iframe>
-      </div>
-
-      <div class="image-wrapper" data-project="micro-shorts">
-        <iframe src="https://player.vimeo.com/video/1114201026?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
-                title="Parkering" loading="lazy"
-                allow="autoplay; fullscreen; picture-in-picture"
-                referrerpolicy="strict-origin-when-cross-origin"></iframe>
-      </div>
+        <div class="image-wrapper" data-project="micro-shorts">
+          <iframe src="https://player.vimeo.com/video/1114202441?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
+                  title="Motorcross" loading="lazy"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <div class="image-wrapper" data-project="micro-shorts">
+          <iframe src="https://player.vimeo.com/video/1114201026?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
+                  title="Parkering" loading="lazy"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
 
       <div class="mobile-text" data-copy-for="micro-shorts"></div>
 
       <div class="divider"></div>
 
       <!-- DEEPFAKE -->
-      <div class="image-wrapper" data-project="deepfake">
-        <img src="assets/enok-carface-2-elvin-odelholm.jpg" alt="" />
-      </div>
-
-      <div class="image-wrapper" data-project="deepfake">
-        <img src="assets/enok-crows-2-elvin-odelholm.jpg" alt="" />
-      </div>
+        <div class="image-wrapper" data-project="deepfake">
+          <img src="assets/enok-carface-2-elvin-odelholm.jpg" alt="" />
+        </div>
+        <div class="image-wrapper" data-project="deepfake">
+          <img src="assets/enok-crows-2-elvin-odelholm.jpg" alt="" />
+        </div>
 
       <div class="mobile-text" data-copy-for="deepfake"></div>
-
-      <div class="divider"></div>
-
-      <!-- MATERIAL WORLDS -->
-      <div class="image-wrapper" data-project="material-worlds">
-        <img src="assets/material worlds arvid elvin odelholm.jpg" alt="" />
-      </div>
-
-      <div class="image-wrapper" data-project="material-worlds">
-        <img src="assets/material worlds julia elvin odelholm.jpg" alt="" />
-      </div>
-
-      <div class="mobile-text" data-copy-for="material-worlds"></div>
 
       <div class="spacer-desktop"></div>
 
@@ -776,6 +992,12 @@ body.about-open .meta { display: block; }
 </div>
 
 <script>
+
+// swap ○ for ● inside a button without touching the words next to it
+function setMark(button, filled) {
+  const mark = button.querySelector('.mark');
+  if (mark) mark.textContent = filled ? '●' : '○';
+}
 
 // copy the text into the mobile header, about panel and captions
 const identity = document.querySelector('.identity');
@@ -800,10 +1022,37 @@ document.querySelectorAll('.mobile-text[data-copy-for]').forEach(slot => {
   const button = document.createElement('button');
   button.type = 'button';
   button.className = 'info-toggle';
-  button.textContent = '○ Info';
+  button.innerHTML = '<span class="mark">○</span> Info';
   button.setAttribute('aria-expanded', 'false');
 
   slot.insertBefore(button, body);
+});
+
+// a project can hold several image pairs. show the first, and give it
+// a dot per pair to switch with. built here rather than written into
+// the markup so the dots can never fall out of step with the pairs
+document.querySelectorAll('.pair-set').forEach(set => {
+  const pairs = set.querySelectorAll('.pair');
+  if (!pairs.length) return;
+
+  pairs[0].classList.add('pair-active');
+  if (pairs.length < 2) return;
+
+  const dots = document.createElement('div');
+  dots.className = 'pair-dots';
+
+  pairs.forEach((pair, index) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.className = 'pair-dot';
+    dot.dataset.pair = index;
+    dot.textContent = index === 0 ? '●' : '○';
+    dot.setAttribute('aria-label', 'Image set ' + (index + 1));
+    dot.setAttribute('aria-current', String(index === 0));
+    dots.appendChild(dot);
+  });
+
+  set.appendChild(dots);
 });
 
 // clone the page 3x so the scroll can loop
@@ -845,6 +1094,7 @@ const observer = new IntersectionObserver(entries => {
   let nearest = null;
   let nearestTop = Infinity;
   visibleTiles.forEach(tile => {
+    if (tile.offsetParent === null) return;   // sits in a pair that is switched off
     const top = Math.abs(tile.getBoundingClientRect().top);
     if (top < nearestTop) { nearestTop = top; nearest = tile; }
   });
@@ -992,13 +1242,35 @@ window.addEventListener('load', () => {
 
 window.addEventListener('resize', () => seat(true));
 
+/* loading order. the stamp is preloaded in the head, then the browser
+   works down the document, so the first pair of each project arrives in
+   the order you scroll past it. the switched-off pairs carry
+   loading="lazy" and sit in a display:none box, which means the browser
+   never asks for them at all — nothing competes with the images on
+   screen. once the page has finished, fetch them quietly, two at a
+   time, so a dot click finds them already in cache rather than blank. */
+window.addEventListener('load', () => {
+  const hidden = document.querySelectorAll('.pair:not(.pair-active) img');
+  const urls = [...new Set([...hidden].map(img => img.getAttribute('src')))];
+
+  let next = 0;
+  function fetchNext() {
+    if (next >= urls.length) return;
+    const warm = new Image();
+    warm.onload = warm.onerror = fetchNext;
+    warm.src = urls[next++];
+  }
+  fetchNext();
+  fetchNext();
+});
+
 // Info button
 const layout = document.getElementById('layout');
 const paneToggle = document.getElementById('pane-toggle');
 
 paneToggle.addEventListener('click', () => {
   const hidden = layout.classList.toggle('info-hidden');
-  paneToggle.textContent = hidden ? '○ Info' : '● Info';
+  setMark(paneToggle, !hidden);
   paneToggle.setAttribute('aria-pressed', String(hidden));
 
   seat(true);
@@ -1018,11 +1290,36 @@ document.addEventListener('click', event => {
       node.classList.toggle('open', open);
       const b = node.querySelector('.info-toggle');
       if (b) {
-        b.textContent = open ? '● Info' : '○ Info';
+        setMark(b, open);
         b.setAttribute('aria-expanded', String(open));
       }
     });
 
+  measure();
+  normalize();
+});
+
+// the dots that switch image pairs
+document.addEventListener('click', event => {
+  const dot = event.target.closest('.pair-dot');
+  if (!dot) return;
+
+  const slug = dot.closest('.pair-set').dataset.project;
+  const index = Number(dot.dataset.pair);
+
+  // every project exists three times over because of the loop, so all
+  // three copies switch together or you would scroll round to the old one
+  document.querySelectorAll('.pair-set[data-project="' + slug + '"]').forEach(set => {
+    set.querySelectorAll('.pair').forEach((pair, i) => {
+      pair.classList.toggle('pair-active', i === index);
+    });
+    set.querySelectorAll('.pair-dot').forEach((d, i) => {
+      d.textContent = i === index ? '●' : '○';
+      d.setAttribute('aria-current', String(i === index));
+    });
+  });
+
+  // pairs are rarely the same height, so the loop has to re-measure
   measure();
   normalize();
 });
@@ -1034,7 +1331,7 @@ document.addEventListener('click', event => {
   const open = document.body.classList.toggle('about-open');
 
   document.querySelectorAll('.about-toggle').forEach(button => {
-    button.textContent = open ? '● About' : '○ About';
+    setMark(button, open);
     button.setAttribute('aria-expanded', String(open));
   });
 });

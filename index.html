@@ -722,8 +722,7 @@ body.about-open .meta { display: block; }
 
     <!-- the portrait that spins as you scroll -->
     <div class="image-wrapper stamp">
-      <img class="stamp-image" src="assets/title-card-01.png" alt=""
-           fetchpriority="high" decoding="async" />
+      <img class="stamp-image" src="assets/title-card-01.png" alt="" />
     </div>
 
     <!-- EDIT 4 — IMAGES. Slug must match a text block in EDIT 3. -->
@@ -746,7 +745,7 @@ body.about-open .meta { display: block; }
             <img src="assets/centralt innehall punch1 elvin odelholm.jpg" alt="" loading="lazy" />
           </div>
           <div class="image-wrapper" data-project="core-curriculum">
-            <img src="assets/centralt innehall punch2 elvin odelholm.jpg.jpg" alt="" loading="lazy" />
+            <img src="assets/centralt innehall punch2 elvin odelholm.jpg" alt="" loading="lazy" />
           </div>
         </div>
 
@@ -759,7 +758,7 @@ body.about-open .meta { display: block; }
           </div>
         </div>
 
-         <div class="pair">
+        <div class="pair">
           <div class="image-wrapper" data-project="core-curriculum">
             <img src="assets/centralt innehall bok3 elvin odelholm.jpg" alt="" loading="lazy" />
           </div>
@@ -767,8 +766,6 @@ body.about-open .meta { display: block; }
             <img src="assets/centralt innehall bok2 elvin odelholm.jpg" alt="" loading="lazy" />
           </div>
         </div>
-
-      
 
       </div>
 
@@ -788,7 +785,7 @@ body.about-open .meta { display: block; }
           </div>
         </div>
 
-         <div class="pair">
+        <div class="pair">
           <div class="image-wrapper" data-project="atelier-cru">
             <img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-3.jpg" alt="" loading="lazy" />
           </div>
@@ -797,7 +794,7 @@ body.about-open .meta { display: block; }
           </div>
         </div>
 
-         <div class="pair">
+        <div class="pair">
           <div class="image-wrapper" data-project="atelier-cru">
             <img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-2.jpg" alt="" loading="lazy" />
           </div>
@@ -855,7 +852,7 @@ body.about-open .meta { display: block; }
           </div>
         </div>
 
-          <div class="pair">
+        <div class="pair">
           <div class="image-wrapper" data-project="bound-2">
             <img src="assets/bound 2 06-crucifix-V16 elvin odelholm.jpg" alt="" loading="lazy" />
           </div>
@@ -864,7 +861,7 @@ body.about-open .meta { display: block; }
           </div>
         </div>
 
-         <div class="pair">
+        <div class="pair">
           <div class="image-wrapper" data-project="bound-2">
             <img src="assets/bound 2 10-dove-V07 elvin odelholm.jpg" alt="" loading="lazy" />
           </div>
@@ -946,6 +943,7 @@ body.about-open .meta { display: block; }
         <div class="image-wrapper" data-project="ad-space">
           <img src="assets/ad horse bts1 elvin odelholm.jpg" alt="" />
         </div>
+
         <div class="image-wrapper" data-project="ad-space">
           <img src="assets/ad horse elvin odelholm.jpg" alt="" />
         </div>
@@ -961,6 +959,7 @@ body.about-open .meta { display: block; }
                   allow="autoplay; fullscreen; picture-in-picture"
                   referrerpolicy="strict-origin-when-cross-origin"></iframe>
         </div>
+
         <div class="image-wrapper" data-project="micro-shorts">
           <iframe src="https://player.vimeo.com/video/1114201026?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
                   title="Parkering" loading="lazy"
@@ -976,6 +975,7 @@ body.about-open .meta { display: block; }
         <div class="image-wrapper" data-project="deepfake">
           <img src="assets/enok-carface-2-elvin-odelholm.jpg" alt="" />
         </div>
+
         <div class="image-wrapper" data-project="deepfake">
           <img src="assets/enok-crows-2-elvin-odelholm.jpg" alt="" />
         </div>
@@ -1055,8 +1055,15 @@ document.querySelectorAll('.pair-set').forEach(set => {
   set.appendChild(dots);
 });
 
-// clone the page 3x so the scroll can loop
-const COPIES = 3;
+// clone the page 3x so the scroll can loop — DESKTOP ONLY.
+// on mobile the document itself scrolls, and the browser fights the
+// teleport hard enough to be worse than no loop at all: it jumps, and
+// it will not stay on the stamp. one copy, plain scrolling, no loop.
+// with a single .loop-unit the measuring below returns 0 and every
+// loop function quietly does nothing, so nothing else needs a guard.
+// changing width across the breakpoint needs a reload to take effect.
+const MOBILE = window.matchMedia('(max-width: 768px)');
+const COPIES = MOBILE.matches ? 1 : 3;
 
 const scrollArea = document.getElementById('scroll-area');
 const loopUnit = scrollArea.querySelector('.loop-unit');
@@ -1133,7 +1140,6 @@ document.querySelectorAll('.image-wrapper video').forEach(video => {
 
 // the loop, and the stamp that spins with it
 const SPIN = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 0.2;
-const MOBILE = window.matchMedia('(max-width: 768px)');
 const stamps = document.querySelectorAll('.stamp-image');
 const mobileHeader = document.getElementById('mobile-header');
 
@@ -1224,8 +1230,16 @@ seat(false);
 /* an image has no height until it loads, so the page keeps growing
    for a while after the script runs. re-seat on every one of them,
    which pins us to the stamp right up until the visitor scrolls */
+let reseatQueued = false;
 function reseatIfUntouched() {
-  if (!userHasScrolled) seat(false);
+  // one re-seat per frame at most. twenty images finishing at once
+  // used to mean twenty jumps, which is what made loading look glitchy
+  if (userHasScrolled || reseatQueued) return;
+  reseatQueued = true;
+  requestAnimationFrame(() => {
+    reseatQueued = false;
+    if (!userHasScrolled) seat(false);
+  });
 }
 
 scrollArea.querySelectorAll('img').forEach(img => {
@@ -1250,6 +1264,8 @@ window.addEventListener('resize', () => seat(true));
    screen. once the page has finished, fetch them quietly, two at a
    time, so a dot click finds them already in cache rather than blank. */
 window.addEventListener('load', () => {
+  if (MOBILE.matches) return;   // every pair is visible here, lazy loading covers it
+
   const hidden = document.querySelectorAll('.pair:not(.pair-active) img');
   const urls = [...new Set([...hidden].map(img => img.getAttribute('src')))];
 

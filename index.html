@@ -133,7 +133,10 @@ a { color: inherit; text-decoration: none; }
   margin-inline: auto;
 }
 
-.layout.info-hidden .copy-body { display: none; }
+/* the Project Info button governs the text pane only. without
+   .column-fixed here it also hid the copy inside the mobile captions,
+   since .info-hidden is the default state and sits on .layout */
+.layout.info-hidden .column-fixed .copy-body { display: none; }
 
 .pane-toggle {
   font: inherit;
@@ -382,6 +385,7 @@ body.about-open .meta { display: block; }
 
 .mobile-header,
 .about-overlay,
+.mobile-head,
 .mobile-text { display: none; }
 
 @media (max-width: 768px) {
@@ -397,7 +401,12 @@ body.about-open .meta { display: block; }
   .scroll-area { padding: 10px; }
   .grid { grid-template-columns: 1fr; }
 
-  /* no switching on mobile: one column, every pair shown in turn */
+  /* no switching on mobile: one column, every pair shown in turn.
+     .pair-set is a plain block on desktop, where only one pair is
+     visible and spacing never comes up. here every pair shows, so it
+     needs a gap of its own — otherwise the last image of one pair
+     sits flush against the first of the next. */
+  .pair-set { display: grid; gap: var(--gap); }
   .pair { grid-template-columns: 1fr; }
   .pair:not(.pair-active) { display: grid; }
   .pair-dots { display: none; }
@@ -422,26 +431,24 @@ body.about-open .meta { display: block; }
     margin: 20px 0 0;
   }
 
-  .mobile-text .copy-head { margin-top: 0; }
-
-  .mobile-text .copy-body { display: none; }
-  .mobile-text.open .copy-body { display: block; margin-top: 1em; }
-
-  .info-toggle {
+  /* the caption is split in two on mobile: the title sits above the
+     images, the Info button and the description below them. both
+     halves are cloned from the same block in EDIT 3 */
+  .mobile-head {
     display: block;
-    margin-top: 10px;
-    font: inherit;
-    color: var(--fg);
-
-    appearance: none;
-    -webkit-appearance: none;
-    background: none;
-    border: none;
-    padding: 0;
-    text-decoration: none;
-    cursor: pointer;
+    font-size: 1.1em;
+    margin: 0 0 10px;
   }
-  .info-toggle:hover { color: #fff; }
+  .mobile-head .copy-head { margin-top: 0; }
+
+  .mobile-text .copy-head { display: none; }
+  .mobile-text .copy-body { display: block; margin-top: 1em; }
+
+  /* not a control — just the word Info marking where the text starts */
+  .info-label {
+    margin-top: 10px;
+    color: #fff;
+  }
 
   body.about-open { overflow: hidden; }
 
@@ -483,7 +490,7 @@ body.about-open .meta { display: block; }
 <div class="about-corner">
   <div class="corner-buttons">
     <button type="button" id="pane-toggle" class="pane-toggle" aria-pressed="true">
-      <span class="mark">○</span> Info
+      <span class="mark">○</span> Project Info
     </button>
 
     <button type="button" class="about-toggle" aria-expanded="false">
@@ -1016,16 +1023,36 @@ document.querySelectorAll('.mobile-text[data-copy-for]').forEach(slot => {
 
   slot.innerHTML = source.innerHTML;
 
+  // mobile shows the title above the images. the slot in the markup
+  // sits after them, so copy the head into a second slot inserted
+  // before whatever comes first for this project — its .pair-set if
+  // it has one, otherwise its first tile
+  const head = source.querySelector('.copy-head');
+  const grid = slot.parentElement;
+  const firstBlock = grid.querySelector(
+    '.pair-set[data-project="' + slot.dataset.copyFor + '"], ' +
+    '.image-wrapper[data-project="' + slot.dataset.copyFor + '"]'
+  );
+
+  if (head && firstBlock) {
+    const headSlot = document.createElement('div');
+    headSlot.className = 'mobile-head';
+    headSlot.dataset.headFor = slot.dataset.copyFor;
+    headSlot.innerHTML = head.outerHTML;
+    grid.insertBefore(headSlot, firstBlock);
+  }
+
   const body = slot.querySelector('.copy-body');
   if (!body) return;
 
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'info-toggle';
-  button.innerHTML = '<span class="mark">○</span> Info';
-  button.setAttribute('aria-expanded', 'false');
+  // on mobile the description is simply always there, so this is a
+  // heading rather than a control — a div, not a button, and it sits
+  // in the filled state permanently
+  const label = document.createElement('div');
+  label.className = 'info-label';
+  label.innerHTML = '<span class="mark">●</span> Info';
 
-  slot.insertBefore(button, body);
+  slot.insertBefore(label, body);
 });
 
 // a project can hold several image pairs. show the first, and give it
@@ -1290,29 +1317,6 @@ paneToggle.addEventListener('click', () => {
   paneToggle.setAttribute('aria-pressed', String(hidden));
 
   seat(true);
-});
-
-// Info buttons on mobile, one per caption
-document.addEventListener('click', event => {
-  const button = event.target.closest('.info-toggle');
-  if (!button) return;
-
-  const caption = button.closest('.mobile-text');
-  const slug = caption.dataset.copyFor;
-  const open = !caption.classList.contains('open');
-
-  document.querySelectorAll('.mobile-text[data-copy-for="' + slug + '"]')
-    .forEach(node => {
-      node.classList.toggle('open', open);
-      const b = node.querySelector('.info-toggle');
-      if (b) {
-        setMark(b, open);
-        b.setAttribute('aria-expanded', String(open));
-      }
-    });
-
-  measure();
-  normalize();
 });
 
 // the dots that switch image pairs

@@ -82,6 +82,7 @@
 
 html, body {
   height: 100%;
+  overflow-anchor: none;
   font-family: 'ArialNarrow', sans-serif;
   line-height: var(--line-height);
   background-color: var(--bg);
@@ -228,6 +229,11 @@ body.about-open .meta { display: block; }
 .scroll-area {
   overflow-y: auto;
   padding: var(--pad);
+
+  /* browsers shift the scroll position to keep whatever you are
+     looking at still while images above load in. that drags the
+     page off the stamp on startup, so turn it off */
+  overflow-anchor: none;
 
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -631,8 +637,7 @@ body.about-open .meta { display: block; }
 
     <!-- the portrait that spins as you scroll -->
     <div class="image-wrapper stamp">
-      <img class="stamp-image" alt=""
-           src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'><circle cx='300' cy='300' r='290' fill='%23141414' stroke='%23555'/></svg>" />
+      <img class="stamp-image" src="assets/title-card-01.png" alt="" />
     </div>
 
     <!-- EDIT 4 — IMAGES. Slug must match a text block in EDIT 3. -->
@@ -705,19 +710,6 @@ body.about-open .meta { display: block; }
 
       <div class="divider"></div>
 
-           <!-- MATERIAL WORLDS -->
-      <div class="image-wrapper" data-project="material-worlds">
-        <img src="assets/material worlds arvid elvin odelholm.jpg" alt="" />
-      </div>
-
-      <div class="image-wrapper" data-project="material-worlds">
-        <img src="assets/material worlds julia elvin odelholm.jpg" alt="" />
-      </div>
-
-      <div class="mobile-text" data-copy-for="material-worlds"></div>
-
-      <div class="divider"></div>
-
       <!-- AD-SPACE FOR RENT -->
       <div class="image-wrapper" data-project="ad-space">
         <img src="assets/ad horse bts1 elvin odelholm.jpg" alt="" />
@@ -760,6 +752,19 @@ body.about-open .meta { display: block; }
       </div>
 
       <div class="mobile-text" data-copy-for="deepfake"></div>
+
+      <div class="divider"></div>
+
+      <!-- MATERIAL WORLDS -->
+      <div class="image-wrapper" data-project="material-worlds">
+        <img src="assets/material worlds arvid elvin odelholm.jpg" alt="" />
+      </div>
+
+      <div class="image-wrapper" data-project="material-worlds">
+        <img src="assets/material worlds julia elvin odelholm.jpg" alt="" />
+      </div>
+
+      <div class="mobile-text" data-copy-for="material-worlds"></div>
 
       <div class="spacer-desktop"></div>
 
@@ -818,6 +823,10 @@ for (let i = 1; i < COPIES; i++) {
 // swap the caption when a project scrolls into view
 const copyBlocks = document.querySelectorAll('.project-copy');
 
+// which tiles are on screen right now. keeping the whole set, rather
+// than reacting to one entry at a time, is what lets the caption go
+// blank again when nothing is in view — at the stamp, for instance
+const visibleTiles = new Set();
 let currentProject = '';
 
 function showCopy(slug) {
@@ -827,11 +836,21 @@ function showCopy(slug) {
 }
 
 const observer = new IntersectionObserver(entries => {
-  const visible = entries.find(entry => entry.isIntersecting);
-  if (!visible) return;
+  entries.forEach(entry => {
+    if (entry.isIntersecting) visibleTiles.add(entry.target);
+    else visibleTiles.delete(entry.target);
+  });
 
-  const slug = visible.target.dataset.project;
-  if (!slug || slug === currentProject) return;
+  // of the tiles on screen, caption the one nearest the top
+  let nearest = null;
+  let nearestTop = Infinity;
+  visibleTiles.forEach(tile => {
+    const top = Math.abs(tile.getBoundingClientRect().top);
+    if (top < nearestTop) { nearestTop = top; nearest = tile; }
+  });
+
+  const slug = nearest ? nearest.dataset.project : 'none';
+  if (slug === currentProject) return;
 
   currentProject = slug;
   showCopy(slug);
@@ -851,6 +870,7 @@ let unitHeight = 0;
 let origin = 0;
 let lastTop = 0;
 let angle = 0;
+let seatedAt = 0;
 
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
@@ -875,7 +895,7 @@ function measure() {
   }
 }
 
-function seat() {
+function seat(keepPosition) {
   const previousHeight = unitHeight;
   const previousOrigin = origin;
   const top = getTop();
@@ -883,12 +903,13 @@ function seat() {
   measure();
   if (!unitHeight) return;
 
-  const fraction = previousHeight
+  const fraction = keepPosition && previousHeight
     ? (top - previousOrigin - previousHeight) / previousHeight
     : 0;
 
   setTop(origin + unitHeight + unitHeight * fraction);
   lastTop = getTop();
+  seatedAt = lastTop;
 }
 
 function normalize() {
@@ -918,10 +939,16 @@ function onScroll() {
 scrollArea.addEventListener('scroll', onScroll);
 window.addEventListener('scroll', onScroll);
 
-seat();
+seat(false);
 
-window.addEventListener('load', seat);
-window.addEventListener('resize', seat);
+/* images have no height until they load, so measure again once
+   they do. if you have not scrolled yet, go back to the stamp;
+   if you have, hold your place instead of yanking you to the top */
+window.addEventListener('load', () => {
+  seat(Math.abs(getTop() - seatedAt) > 2);
+});
+
+window.addEventListener('resize', () => seat(true));
 
 // Info button
 const layout = document.getElementById('layout');
@@ -932,7 +959,7 @@ paneToggle.addEventListener('click', () => {
   paneToggle.textContent = hidden ? '○ Info' : '● Info';
   paneToggle.setAttribute('aria-pressed', String(hidden));
 
-  seat();
+  seat(true);
 });
 
 // Info buttons on mobile, one per caption

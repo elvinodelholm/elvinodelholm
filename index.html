@@ -1,749 +1,975 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Elvin Odelholm Portfolio</title>
-     <!-- Preload -->
-    <link rel="preload" as="image" href="assets/centralt innehall portratt elvin odelholm.jpg" />
-    <link rel="preload" as="image" href="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-4.jpg" />
-    <link rel="preload" as="image" href="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-2.jpg" />
-     <link rel="icon" type="image/png" href="assets/favicon.png" />
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Portfolio</title>
+<link rel="icon" type="image/png" href="assets/favicon.png" />
 
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html, body {
-        height: 100%;
-        font-family: 'ArialNarrow', sans-serif;
-        background-color: black;
-        color: rgba(255, 255, 255, 0.643);
-      }
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-      .layout {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        height: 100vh;
-        overflow: hidden;
-      }
-      .column-fixed {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        background-color: black;
-        padding: 20px;
-        border-right: 0px solid rgba(255, 255, 255, 0.643);
-        border-top: 0px solid rgba(255, 255, 255, 0.643);
-        overflow-y: auto;
-      }
-      .text-container-1 { margin-bottom: 20px; }
-      .text-container-2 p {
-        display: none;
-        margin-bottom: 20px;
-      }
-      .text-container-2 p.active { display: block; }
-      .text-container-3 { margin-top: auto; }
-      .cv-entry {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 4px;
-      }
-      .cv-entry i {
-        font-style: italic;
-        font-weight: normal;
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-      }
-      .cv-label { flex: 1; white-space: normal; }
-      .cv-year { margin-left: 20px; white-space: nowrap; }
-      .contact { margin-top: 20px; }
-      .scroll-area {
-        overflow-y: auto;
-        padding: 20px;
-      }
-      .grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-      .image-wrapper {
-        width: 100%;
-        display: flex;
-        align-items: center;‘
-        justify-content: center;
-        overflow: hidden;
-      }
-      .image-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-      .mobile-header {
-        display: none;
-        padding: 20px;
-        margin-bottom: 25vh;
-        background-color: black;
-        border-bottom: 2px solid rgba(255, 255, 255, 0.643);
-      }
-      .mobile-text {
-        display: none;
-        font-size: 1.1em;
-        margin: 150px 0 10px;
-      }
-      .mobile-footer {
-        display: none;
-        padding: 20px;
-        background-color: black;
-        border-top: 2px solid rgba(255, 255, 255, 0.643);
-        margin-top: 150px;
-      }
-      .mobile-footer p { margin-bottom: 10px; }
-      .spacer { height: 10vh; pointer-events: none; }
-      .divider {
-        grid-column: 1 / -1;
-        height: 2px;
-        background-color: black;
-        opacity: 0.9;
-        margin: 150px 0;
-      }
-      .desktop-stamp {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 0;
-      }
-      .desktop-stamp img {
-        width: auto;
-        height: 40vh;
-      }
-      .portrait { border: 0px solid white; }
-      #spinning-portrait { transition: transform 0.05s linear; }
+<!--
+  YOUR CONTENT GOES IN 5 PLACES. Search for "EDIT".
+    EDIT 1  fonts, colours, sizes   (top of the CSS)
+    EDIT 2  your name
+    EDIT 3  project texts
+    EDIT 4  project images
+    EDIT 5  cv / press / contact
 
-      
+  TO ADD A PROJECT — two blocks, same slug:
 
-      @media (min-width: 769px) {
-         .desktop-stamp {
-          padding-top: 26vh;   /* smaller space above */
-          padding-bottom: 60vh; /* larger space below */
-        }
-
-         .vimeo-embed { width:95%; aspect-ratio:16/9; }
-         .vimeo-embed--tall { aspect-ratio:4/3; } /* your 75% one */
-         .vimeo-embed iframe { width:100%; height:100%; border:0; display:block; }
-
-        .spacer-desktop {
-          display: block;
-          height: 20vh;        /* <-- change this value in CSS only */
-          grid-column: 1 / -1; /* spans across both columns */
-          pointer-events: none;
-        }
-
-      }
-
-      /* Mobile layout */
-      @media (max-width: 768px) {
-        .layout { display: block; height: auto; }
-        .column-fixed { display: none; }
-        .scroll-area { padding: 10px; }
-        .grid { grid-template-columns: 1fr; gap: 10px; }
-        .mobile-header {
-          display: block;
-          padding: 10px; /* same as .scroll-area padding on mobile */
-        }
-        .mobile-text, .mobile-footer { display: block; }
-        .mobile-stamp {
-          display: flex;
-          justify-content: center;
-        }
-          .desktop-stamp {
-          padding-top: 0vh;   /* or vh if you want proportional spacing */
-          padding-bottom: 24vh; /* increase this to create more space below */
-        }
-      .vimeo-embed { width:100%; aspect-ratio:16/9; }
-      .vimeo-embed--tall { aspect-ratio:4/3; } /* your 75% one */
-      .vimeo-embed iframe { width:100%; height:100%; border:0; display:block; 
-      }
-      }
-
-      @font-face {
-        font-family: 'ArialNarrow';
-        src: url('assets/arial-narrow.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: 'ArialNarrow';
-        src: url('assets/arial-narrow-bold.woff') format('woff');
-        font-weight: bold;
-        font-style: normal;
-        font-display: swap;
-      }
-
-     
-    </style>
-  </head>
-  <body>
-    <div class="mobile-header"><b>Elvin Odelholm</b><br>
-      Art Director based in Stockholm.
-    </div>
-
-    <div class="layout">
-      <div class="column-fixed">
-        <div class="text-container-1">
-          <b>Elvin Odelholm</b>
-          <p>Art Director based in Stockholm.</p>
-        </div>
-
-        <div class="text-container-2" id="text-container-2">
-          <p id="text-red" >
-            <b>13:6 Collaborations</b><br>
-            <i>Art Direction, Photography, Graphic Design</i><br><br>
-            Graphic identity, running order and promotion for the Beckmans Collaboration Show 2025. 
-            The fashion students wanted a classic look with a focus on raw materials. Following the theme, I shot the models against a lit softbox as a backdrop, creating stark contrast and a raw, unpolished frame that became central to the visual identity.
-            <br><br>
-            <b>Creative Direction:</b> Annika Berner<br>
-            <b>Art Direction</b> Elvin Odelholm<br>
-            <b>Photography & Design :</b> Elvin Odelholm<br>
-            <b>Head of Course:</b> Elisabet Yanagisawa<br>
-            <b>Head of Programme:</b> Per Engsheden<br>
-                        <b>Collaborating Brands:</b> Arket, Asket, & Other Stories, <br>Rave Review, Remake, Weekday</b>
-
-          </p>
-
-          <p id="text-purple"><b>Core Curriculum / Centralt Innehåll</b><br>
-            <i>Art Direction, Photography, Graphic Design</i><br><br>
-            A photo series and a book as part of my graduation project at Beckmans College of Design. After 17 years of school, I looked back on my experience of school and realised that a big part of my memories revolved around small, seemingly pointless activities, things that had nothing to do with grades or curriculum. I wanted to highlight these memories and question what we consider meaningful or meaningless. Using a wig and some post-production, I stepped into the role of a schoolchild and restaged a series of memories. I then compiled the photos into a book inspired by the official Swedish curriculum.  
-            <br><br>Awarded with a scholarship from <a href="https://happy.forsman.com/" style="text-decoration: underline;">F&amp;B Happy</a>.
-            <br><br>
-            <b>Art Direction, Design &amp; Photography:</b> Elvin Odelholm<br>
-            <b>Head of Course:</b> Sophia Wood
-          </p>
-
-          <p id="text-peach"><b>Off-White™ Lab</b><br>
-            <i>Art Direction, Concept, Post-Production</i><br><br>
-          Visuals for the launch of Off-White™ Lab, a more explorative branch of the Off-White™ brand. On my part, I developed and finalized concepts, like the Gaspar Noé inspired burst of neon signs, as well as turning raw footage into final art, like the contcat sheets and spinning talents relighted with motion control.
-          <br><br>
-            Featured in <a href="https://www.highsnobiety.com/p/lab-off-white-launch/" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Highsnobiety</a>.
-            <br><br>
-            <b>Client: </b>Off-White™<br>
-            <b>Lead Agency: </b>Highsnobiety<br>
-            <b>Creative Agency: </b>Services Généraux<br>
-
-          </p>
-
-          <p id="text-cobolt"><b>Bound 2</b><br>
-             <i>Art Direction, Image Production</i><br><br>
-            Personal project made for Services Généraux as part of their ongoing Instagram <a href="https://www.instagram.com/p/DavaQzcDUiU/?img_index=1" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">series</a>.
-
-            <br><br>
-            <b>Art Direction:</b> Josefine Nicklasson & Elvin Odelholm<br>
-            <b>Image production:</b> Elvin Odelholm<br>
-            <b>Agency: </b>Services Généraux<br>
-
-
-
-  </p>
-
-
-          <p id="text-green"><b>Collecting Music</b><br>
-            <i>Art Direction, Graphic Design</i><br><br>
-            We were assigned to create magazines about music. My group decided to use collecting and statistics as our angle. I made a centrefold poster illustrating the 100 most common nouns in the lyrics of the 100 most streamed songs. 
-            <br><br>
-            <b>Team:</b> Elvin Odelholm, Adam Arinbjarnarson, Solvej Jansson<br>
-            <b>Head of Course:</b> Stefania Malmsten
-          </p>
-
-          <p id="text-orange"><b>Ad Space For Rent</b><br>
-            <i>Concept, Photography</i><br><br>
-        Part of the application process for Beckmans College of Design was to design large-scale public typography. Since Beckmans has a background as an advertising school, I proposed a new way of generating ad revenue, writing <i>Ad Space For Rent</i> on a horse, alongside my phone number. Unfortunately, I received no calls.            <br><br>
-            
-          </p>
-
-          <p id="text-yellow"><b>The Little Conscience</b><br>
-             <i>Art Direction</i><br><br>
-              Svenskt Tenn wanted to communicate that their profits go to research. My class at Beckmans was therefore given the task of creating a scientific exhibition in their store. A friend and I teamed up and based our project on a research theme about AI as a kind of superstrong external conscience. Then we built a two-meter-tall styrofoam muscle monster sculpture of Jiminy Cricket. 
-              <br><br>
-              The piece was later exhibited at the Royal Swedish Academy of Sciences and at Riche Fenix in Stockholm.             <br><br>
-            <b>Partner:</b> Svenskt Tenn, The Beijer Foundation<br>
-            <b>Team:</b> Elvin Odelholm, Jonatan Modin<br>
-            <b>Project Lead:</b> Sophia Wood
-          </p>
-
-          <p id="text-black"><b>Atelier Cru</b><br>
-            <i>Art Direction, Photography</i><br><br>
-            Atelier Cru launched a collection exploring how zips and folds can make garments modifiable. I art directed and hands on created a photography campaign inspired by this idea of shapeshifting silhouettes and moving beyond the natural form.
-            <br><br>
-            Featured in <a href="https://www.kaltblut-magazine.com/exocarp/" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Kaltblut Magazine</a>.
-            <br><br>
-            <b>Client:</b> Atelier Cru<br>
-            <b>Art Director:</b> Elvin Odelholm<br>
-            <b>Photography:</b> Elvin Odelholm<br>
-            <b>Project Lead:</b> Göran Sundberg<br>
-            <b>Fashion Editor:</b> Rebecca Cohen<br>
-          </p>
-
-
-          <p id="text-pink"><b>Trolls</b><br>
-                 <i>AI</i><br><br>
-Visual experiments featuring the faces of small troll dolls that would resurface in the cabinets of my childhood.            <br><br>          
-          </p>
-
-             <p id="text-cyan"><b>enok.92</b><br>
-                 <i>AI</i><br><br>
-            Visual studies of my hometown streets, mixing the very much real with the very much fake.
-            <br><br>          
-          </p>
-
-              <p id="text-magenta"><b>Blender Bender</b><br>
-                 <i>3D, Experimental</i><br><br>
-            Excerpts from 3D-projects in Blender.
-            <br><br>          
-          </p>
-
-
-          <p id="text-blue"><b>Material Worlds</b><br>
-            <i>Art Direction, Photography, Graphic Design</i><br><br>
-            Lookbook for a Beckmans Fashion Show. To highlight the materials and the concept Material Worlds, we took close-up shots of the specific garments and turned them into postcard-like landscapes. The models were then placed within these landscapes for the images in the lookbook. In addition to the landscapes, the lookbook was inspired by the size of postcards and their handwritten notes.
-            <br><br>
-            <b>Art Direction:</b> Elvin Odelholm<br>
-            <b>Post Production:</b> Elvin Odelholm<br>
-            <b>Photography:</b> Jesper Smeding<br>
-            <b>Head of Course:</b> Göran Sundberg<br>
-            <b>Head of Programe:</b> Per Engsheden
-          </p>
-
-
-          <p id="text-grey" class="active"><b></b><br>
-                        <br><br>
-          </p>
-          
-        </div>
-
-        <div class="text-container-3">
-          <b>CV</b><br>
-          <div class="cv-entry">
-            <span class="cv-label">
-              <a href="https://www.plattformproduktion.se/films-features" style="text-decoration: underline;" target="_blank">Plattform Produktion</a><br>
-            </span>
-            <span class="cv-year">2024</span>
-          </div>
-          <div class="cv-entry"><span class="cv-label"><i>Creative Assistant Internship</i></span></div>
-          <br>
-          <div class="cv-entry">
-            <span class="cv-label">
-              <a href="https://ape-creative.club/" style="text-decoration: underline;" target="_blank">APE_CC</a><br>
-            </span>
-            <span class="cv-year">2023</span>
-          </div>
-          <div class="cv-entry"><span class="cv-label"><i>Design Internship</i></span></div>
-          <br>
-          <div class="cv-entry">
-            <span class="cv-label">
-              <a href="https://beckmans.se/" style="text-decoration: underline;" target="_blank">Beckmans College of Design</a>
-            </span>
-            <span class="cv-year">2022–2025</span>
-          </div>
-          <div class="cv-entry"><span class="cv-label"><i>BFA Visual Communication</i></span></div>
-          <br>
-          <div class="cv-entry">
-            <span class="cv-label">Designed over 15 printed book covers and 50 digital book covers for Egmont, Berghs and Opal.</span>
-            <span class="cv-year">2020–present</span>
-          </div>
-          <br>
-
-          <div class="text-container-3">
-            <b>Press</b><br>
-            <div class="cv-entry"><span class="cv-label"><a href="https://www.highsnobiety.com/p/lab-off-white-launch/" target="_blank" style="text-decoration: underline;">Highsnobiety</a></span></div>
-            <div class="cv-entry"><span class="cv-label"><a href="https://www.kaltblut-magazine.com/exocarp/" target="_blank" style="text-decoration: underline;">Kaltblut</a></span></div>
-            <div class="cv-entry"><span class="cv-label"><a href="https://www.resume.se/kommunikation/varumarke/aggklockan-fran-beckmansstudenten-ska-forhindra-mental-krasch/" target="_blank" style="text-decoration: underline;">Resumé Väggklockan</a></span></div>
-            <div class="cv-entry"><span class="cv-label"><a href="https://www.instagram.com/p/DKhP720o7gQ/?img_index=1" target="_blank" style="text-decoration: underline;">F&B Happy Scholarship</a></span></div>
-            <div class="cv-entry"><span class="cv-label"><a href="https://odalisquemagazine.com/2025/11/03/atelier-cru-winter-25-26/" target="_blank" style="text-decoration: underline;">Odalisque</a></span></div>
-
-
-          </div>
-
-          <div class="contact">
-            <b>Contact</b><br>
-            <a href="https://www.instagram.com/elvinodelholm/" target="_blank">Instagram: @elvinodelholm</a><br>
-            <a href="mailto:elvin.odelholm@gmail.com">Mail: elvin.odelholm@gmail.com</a>
-          </div>
-        </div>
+    in EDIT 3
+      <div class="project-copy" data-project="my-slug">
+        <div class="copy-head"><b>Title</b><br /><i>Role</i></div>
+        <div class="copy-body">Text.</div>
       </div>
 
-      <div class="scroll-area" id="scroll-area">
-        <div class="image-wrapper desktop-stamp">
-        <img
-          id="spinning-portrait"
-          class="portrait"
-          src="assets/centralt innehall portratt elvin odelholm.jpg"
-          alt="stamp"
-          fetchpriority="high"
-          loading="eager"
-          decoding="sync"
-        />
-        </div>
-
-        <div class="grid">
-
-
-   <!-- Black -->
-           
-          <div class="mobile-text"><b>Atelier Cru</b><br>
-             <i>Art Direction, Photography</i><br><br>
-            Atelier Cru launched a collection exploring how zips and folds can make garments modifiable. I art directed and hands on created a photography campaign inspired by this idea of shapeshifting silhouettes and moving beyond the natural form.
-            <br><br>
-            Featured in <a href="https://www.kaltblut-magazine.com/exocarp/" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Kaltblut Magazine</a>.
-
-            <br><br>
-            <b>Client:</b> Atelier Cru<br>
-            <b>Art Director:</b> Elvin Odelholm<br>
-            <b>Photography:</b> Elvin Odelholm<br>
-            <b>Project Lead:</b> Göran Sundberg<br>
-            <b>Fashion Editor:</b> Rebecca Cohen<br>
-          </p>
-            <br> <br>
-          </div>
-          <div class="image-wrapper" data-color="Black"><img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-4.jpg" alt="Black" /></div>
-          <div class="image-wrapper" data-color="Black"><img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-2.jpg" alt="Black" /></div>
-          <div class="image-wrapper" data-color="Black"><img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-6.jpg" alt="Black" /></div>
-          <div class="image-wrapper" data-color="Black"><img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-1.jpg" alt="Black" /></div>
-         <!-- <div class="image-wrapper" data-color="Black"><img src="assets/cru bts1.jpg" alt="Black" /></div>
-          <div class="image-wrapper" data-color="Black"><img src="assets/cru bts2.jpg" alt="Black" /></div>
-          -->
-          <div class="divider"></div>
-
-            <!-- Peach -->
-           
-          <div class="mobile-text"><b>Off-White™ Lab</b><br>
-            <i>Art Direction, Concept, Post-Production</i><br><br>
-          Visuals for the launch of Off-White™ Lab, a more explorative branch of the Off-White™ brand. On my part, I developed and finalized concepts, like the Gaspar Noé inspired burst of neon signs, as well as turning raw footage into final art, like the contcat sheets and spinning talents relighted with motion control.
-          <br><br>
-            Featured in <a href="https://www.highsnobiety.com/p/lab-off-white-launch/" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">Highsnobiety</a>.
-            <br><br>
-            <b>Client: </b>Off-White™<br>
-            <b>Lead Agency: </b>Highsnobiety<br>
-            <b>Creative Agency: </b>Services Généraux<br>
-          </p>
-
-          </p>
-            <br> <br>
-          </div>
-
-
-
-
-            <div class="image-wrapper" data-color="Peach">
-            <video autoplay muted loop playsinline style="width: 100%; height: auto;">
-              <source src="assets/off white BURST 3-4 elvin odelholm.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-
-  <div class="image-wrapper" data-color="Peach"><img src="assets/off white spec sheet elvin odelholm.jpg" alt="Black" /></div>
-                     <div class="image-wrapper" data-color="Peach"><img src="assets/off white img 06 JT elvin odelholm.jpg" alt="Black" /></div>
-
-                   
-
-<div class="image-wrapper" data-color="Peach">
-            <video autoplay muted loop playsinline style="width: 100%; height: auto;">
-              <source src="assets/off white 360 TURNTABLE 3-4 elvin odelholm.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-
-
-
-
-           
-          
-          <div class="divider"></div>
-
-
-
-                  <!-- Blue -->
-          <div class="mobile-text"><b>Material Worlds</b><br>
-            <i>Art Direction, Photography, Graphic Design</i><br><br>
-            Lookbook for a Beckmans Fashion Show. To highlight the materials and the concept Material Worlds, we took close-up shots of the specific garments and turned them into postcard-like landscapes. The models were then placed within these landscapes for the images in the lookbook. In addition to the landscapes, the lookbook was inspired by the size of postcards and their handwritten notes.
-            <br><br>
-            <b>Art Direction:</b> Elvin Odelholm<br>
-            <b>Post Production:</b> Elvin Odelholm<br>
-            <b>Photography:</b> Jesper Smeding<br>
-            <b>Head of Course:</b> Göran Sundberg<br>
-            <b>Head of Programe:</b> Per Engsheden
-            <br> <br>
-          </div>
-          <div class="image-wrapper" data-color="Blue"><img src="assets/material worlds julia elvin odelholm.jpg" alt="Blue" /></div>
-          <div class="image-wrapper" data-color="Blue"><img src="assets/material worlds arvid elvin odelholm.jpg" alt="Blue" /></div>
-
-
-                    <div class="divider"></div>
-
-
-           <!-- Cobolt -->
-          <div class="mobile-text"><b>Bound 2</b><br>
-             <i>Art Direction, Image Production</i><br><br>
-            Personal project made for Services Généraux as part of their ongoing Instagram <a href="https://www.instagram.com/p/DavaQzcDUiU/?img_index=1" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">series</a>.
-
-            <br><br>
-            <b>Art Direction:</b> Josefine Nicklasson & Elvin Odelholm<br>
-            <b>Image production:</b> Elvin Odelholm<br>
-            <b>Agency: </b>Services Généraux<br>
-
-
-
-
-          </div>
-          <div class="image-wrapper" data-color="Cobolt"><img src="assets/bound 2 01-black dog-V09 elvin odelholm.jpg" alt="Cobolt" /></div>
-                                                 <div class="image-wrapper" data-color="Cobolt"><img src="assets/bound 2 02-candle-V02 elvin odelholm.jpg" alt="Cobolt" /></div>
-
-          <div class="image-wrapper" data-color="Cobolt"><img src="assets/bound 2 09-airpods-V04 elvin odelholm.jpg" alt="Cobolt" /></div>
-
-          <div class="image-wrapper" data-color="Cobolt"><img src="assets/bound 2 10-dove-V07 elvin odelholm.jpg" alt="Cobolt" /></div>
-
-          <div class="divider"></div>
-
-
-
-  
-                 <!-- Pink -->
-          <div class="mobile-text"><b>Trolls</b><br>
-             <i>AI</i><br><br>
-            Visual experiments featuring the faces of small troll dolls that would resurface in the cabinets of my childhood.            <br><br>          
-            <br><br>
-          </div>
-          <div class="image-wrapper" data-color="Pink"><img src="assets/enok-fly-elvin-odelholm.jpg" alt="Pink" /></div>
-          <div class="image-wrapper" data-color="Pink"><img src="assets/enok-milk1-elvin-odelholm.jpg" alt="Pink" /></div>
-          <div class="divider"></div>
-
-
-
-
-
-          <!-- Purple -->
-          <div class="mobile-text"><b>Core Curriculum / Centralt Innehåll</b><br>
-            <i>Art Direction, Photography, Graphic Design</i><br><br>
-            A photo series and a book as part of my graduation project at Beckmans College of Design. After 17 years of school, I looked back on my experience of school and realised that a big part of my memories revolved around small, seemingly pointless activities, things that had nothing to do with grades or curriculum. I wanted to highlight these memories and question what we consider meaningful or meaningless. Using a wig and some post-production, I stepped into the role of a schoolchild and restaged a series of memories. I then compiled the photos into a book inspired by the official Swedish curriculum.  
-            <br><br>Awarded with a scholarship from <a href="https://happy.forsman.com/" style="text-decoration: underline;">F&amp;B Happy</a>.
-            <br><br>
-            <b>Art Direction, Design &amp; Photography:</b> Elvin Odelholm<br>
-            <b>Head of Course:</b> Sophia Wood
-            <br> <br>
-
-          </div>
-          <div class="image-wrapper" data-color="Purple"><img src="assets/centralt innehall vaga2 elvin odelholm.jpg" alt="Purple" /></div>
-          <div class="image-wrapper" data-color="Purple"><img src="assets/centralt innehall sudd elvin odelholm.jpg" alt="Purple" /></div>           
-          <div class="image-wrapper" data-color="Purple"><img src="assets/centralt innehall bok3 elvin odelholm.jpg" alt="Purple" /></div>
-          <div class="image-wrapper" data-color="Purple"><img src="assets/centralt innehall mjolk2 elvin odelholm.jpg" alt="Purple" /></div>
-
-          <div class="divider"></div>
-
-
-       
-     <!-- Cyan -->
-          <div class="mobile-text"><b>enok.92</b><br>
-             <i>AI</i><br><br>
-              Visual studies of my hometown streets, mixing the very much real with the very much fake.
-
-            <br><br>
-          </div>
-          <div class="image-wrapper" data-color="Cyan"><img src="assets/enok-carface-elvin-odelholm.jpg" alt="Cyan" /></div>
-          <div class="image-wrapper" data-color="Cyan"><img src="assets/enok-crows-elvin-odelholm.jpg" alt="Cyan" /></div>
-          <div class="divider"></div>
-
-
-             <!-- Green -->
-          <div class="mobile-text"><b>Collecting Music</b><br>
-            <i>Art Direction, Graphic Design</i><br><br>
-            We were assigned to create magazines about music. My group decided to use collecting and statistics as our angle. I made a centrefold poster illustrating the 100 most common nouns in the lyrics of the 100 most streamed songs. 
-            <br><br>
-            <b>Team:</b> Elvin Odelholm, Adam Arinbjarnarson, Solvej Jansson<br>
-            <b>Head of Course:</b> Stefania Malmsten
-            <br> <br>
-          </div>
-          <!--OBS F ta concrete-fotona och ev solvejs smycken, det handlar om vibe-->
-          <div class="image-wrapper" data-color="Green"><img src="assets/collecting concrete-3 elvin odelholm.jpg" alt="Green" /></div>
-          <div class="image-wrapper" data-color="Green"><img src="assets/collecting concrete-4 elvin odelholm.jpg" alt="Green" /></div>
-          <div class="divider"></div>
-
-       
-
-               <!-- Yellow -->
-          <div class="mobile-text"><b>The Little Conscience</b><br>
-            <i>Art Direction</i><br><br>
-              Svenskt Tenn wanted to communicate that their profits go to research. My class at Beckmans was therefore given the task of creating a scientific exhibition in their store. A friend and I teamed up and based our project on a research theme about AI as a kind of superstrong external conscience. Then we built a two-meter-tall styrofoam muscle monster sculpture of Jiminy Cricket. 
-              <br><br>
-              The piece was later exhibited at the Royal Swedish Academy of Sciences and at Riche Fenix in Stockholm.             <br><br>
-            <b>Partner:</b> Svenskt Tenn, The Beijer Foundation<br>
-            <b>Team:</b> Elvin Odelholm, Jonatan Modin<br>
-            <b>Project Lead:</b> Sophia Wood
-            <br> <br>
-          </div>
-                    <div class="image-wrapper" data-color="Yellow"><img src="assets/beijer bts4 elvin odelholm.jpg" alt="Yellow" /></div>
-
-          <div class="image-wrapper" data-color="Yellow"><img src="assets/beijer bts8 elvin odelholm.jpg" alt="Yellow" /></div>
-                    <div class="image-wrapper" data-color="Yellow"><img src="assets/beijer bts7 elvin odelholm.jpg" alt="Yellow" /></div>
-          <div class="image-wrapper" data-color="Yellow"><img src="assets/beijer svenskt tenn elvin odelholm.jpg" alt="Yellow" /></div>
-
-          <div class="divider"></div>
-
-
-            <!-- Red -->
-          <div class="mobile-text"><b>13:6 Collaborations</b><br>
-            <i>Art Direction, Photography, Graphic Design</i><br><br>
-            Graphic identity, running order and promotion for the Beckmans Collaboration Show 2025. 
-            The fashion students wanted a classic look with a focus on raw materials. Following the theme, I shot the models against a lit softbox as a backdrop, creating stark contrast and a raw, unpolished frame that became central to the visual identity.
-            <br><br>
-            <b>Creative Direction:</b> Annika Berner<br>
-            <b>Art Direction and Photography:</b> Elvin Odelholm<br>
-            <b>Head of Course:</b> Elisabet Yanagisawa<br>
-            <b>Head of Programme:</b> Per Engsheden<br>
-            <b>Collaborating Brands:</b> Arket, Asket, & Other Stories, Rave Review, Remake, Weekday</b>
-            <br>
-          </div>
-          <div class="image-wrapper" data-color="Red"><img src="assets/136 gustav elvin odelholm.png" alt="Red" /></div>
-            <div class="image-wrapper" data-color="Red">
-            <video autoplay muted loop playsinline style="width: 100%; height: auto;">
-              <source src="assets/136 invite elvin odelholm.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        
-
-          <div class="divider"></div>
-
-
-  <!-- Orange -->
-          <div class="mobile-text"><b>Ad Space For Rent</b><br>
-            <i>Concept, Photography</i><br><br>
-            Part of the application process for Beckmans College of Design was to design large-scale public typography. Since Beckmans has a background as an advertising school, I proposed a new way of generating ad revenue, writing <i>Ad Space For Rent</i> on a horse, alongside my phone number. Unfortunately, I received no calls.            <br><br>
-            <br>    
-          </div>
-          <div class="spacer-desktop"></div>
-          <div class="image-wrapper" data-color="Orange"><img src="assets/ad horse bts1 elvin odelholm.jpg" alt="Orange" /></div>
-          <div class="image-wrapper" data-color="Orange"><img src="assets/ad horse elvin odelholm.jpg" alt="Orange" /></div>
-          <div class="spacer-desktop"></div>
-
-       
-     
-
-                    <div class="spacer image-wrapper" data-color="Orange"></div>
-
-
-       
-                  </div>
-
+    in EDIT 4
+      <div class="image-wrapper" data-project="my-slug">
+        <img src="assets/photo.jpg" alt="" />
       </div>
-    </div>
+      ...one per image, then these two lines:
+      <div class="mobile-text" data-copy-for="my-slug"></div>
+      <div class="divider"></div>
 
-    <div class="mobile-footer">
-      <b>CV</b><br>
+  Images and fonts go in an "assets" folder next to this file.
+  A tile with no <img> in it shows a grey box, so you can lay out first.
+
+  WATCH OUT FOR
+    slugs must match between EDIT 3 and EDIT 4
+    keep the copy-head / copy-body split, the Info button needs it
+    anything outside .loop-unit is seen once, then never again
+    no ids inside .loop-unit, the script clones it 3x
+-->
+
+<style>
+
+/* EDIT 1 — FONTS, COLOURS, SIZES ----------------------------- */
+@font-face {
+  font-family: 'ArialNarrow';
+  src: url('assets/arial-narrow.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'ArialNarrow';
+  src: url('assets/arial-narrow-bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* the whole look of the site is these eight values */
+:root {
+  --bg: #000000;
+  --fg: rgba(255, 255, 255, 0.643);
+  --gap: 10px;
+  --pad: 20px;
+  --divider-space: 150px;
+
+  --grid-max: 66.66vw;
+
+  --pane-width: 240px;
+
+  --text-offset: 4em;
+
+  --title-offset: 3em;
+  --line-height: 1.35;
+}
+
+/* ------- machinery from here down, you can ignore it -------- */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  font-family: 'ArialNarrow', sans-serif;
+  line-height: var(--line-height);
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+a { color: inherit; text-decoration: none; }
+
+.text-link { text-decoration: underline; }
+
+/* one track: the text pane floats on top, it is not a column */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.grid,
+.stamp {
+  max-width: var(--grid-max);
+  margin-inline: auto;
+}
+
+.layout.info-hidden .copy-body { display: none; }
+
+.pane-toggle {
+  font: inherit;
+  color: var(--fg);
+
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+
+  cursor: pointer;
+}
+.pane-toggle:hover { color: #fff; }
+.pane-toggle:focus-visible { outline: 1px solid var(--fg); }
+
+/* buttons + cv panel, top right */
+.about-corner {
+  position: fixed;
+  top: var(--pad);
+  right: var(--pad);
+  z-index: 10;
+  max-height: calc(100vh - var(--pad) * 2);
+
+  width: var(--pane-width);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.corner-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.about-corner .about-toggle {
+  margin-top: 4px;
+}
+
+.about-corner .meta {
+  width: 100%;
+  margin-top: var(--text-offset);
+  min-height: 0;
+  overflow-y: auto;
+  overflow-wrap: break-word;
+  scrollbar-width: none;
+}
+.about-corner .meta::-webkit-scrollbar { display: none; }
+
+.about-toggle {
+  font: inherit;
+  color: var(--fg);
+  appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+
+  text-decoration: none;
+
+  cursor: pointer;
+}
+.about-toggle:focus-visible { outline: 1px solid var(--fg); }
+
+/* the floating text pane, top left */
+.column-fixed {
+  position: fixed;
+  top: var(--pad);
+  left: var(--pad);
+  bottom: var(--pad);
+  z-index: 5;
+  width: var(--pane-width);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  overflow-wrap: break-word;
+
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  pointer-events: none;
+}
+.column-fixed::-webkit-scrollbar { display: none; }
+
+.column-fixed a,
+.column-fixed button { pointer-events: auto; }
+
+.identity {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  padding-bottom: var(--pad);
+}
+
+.project-copy { display: none; margin-bottom: var(--pad); }
+.project-copy.active { display: block; }
+
+.copy-head { margin-top: var(--title-offset); }
+.copy-body { margin-top: var(--text-offset); }
+.copy-credits { margin-top: 1em; }
+
+.meta { display: none; }
+body.about-open .meta { display: block; }
+
+.meta-group { margin-bottom: var(--pad); }
+
+.cv-entry {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.cv-label { flex: 1; white-space: normal; }
+.cv-year  { margin-left: var(--pad); white-space: nowrap; }
+.cv-role  { font-style: italic; }
+
+.scroll-area {
+  overflow-y: auto;
+  padding: var(--pad);
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scroll-area::-webkit-scrollbar { display: none; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap);
+}
+
+.image-wrapper:empty {
+  aspect-ratio: 4 / 5;
+  background-color: #141414;
+}
+
+.image-wrapper {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+}
+.image-wrapper img,
+.image-wrapper video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* embedded players have no natural size, so the ratio is set here.
+   9 / 16 for a vertical clip, 1 / 1 for a square one */
+.image-wrapper iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  display: block;
+}
+
+.divider {
+  grid-column: 1 / -1;
+  height: 2px;
+  background-color: var(--bg);
+  margin: var(--divider-space) 0;
+}
+
+.spacer-desktop {
+  display: block;
+  height: 20vh;
+  grid-column: 1 / -1;
+  pointer-events: none;
+}
+.spacer { height: 10vh; pointer-events: none; }
+
+.stamp {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 26vh;
+  padding-bottom: 60vh;
+}
+.stamp img {
+  width: auto;
+  height: 40vh;
+  transition: transform 0.05s linear;
+}
+
+.mobile-header,
+.about-overlay,
+.mobile-text { display: none; }
+
+@media (max-width: 768px) {
+  .layout { display: block; height: auto; }
+  .column-fixed { display: none; }
+
+  :root { --grid-max: 100%; }
+
+  .about-corner { display: none; }
+
+  html, body { height: auto; min-height: 100%; }
+
+  .scroll-area { padding: 10px; }
+  .grid { grid-template-columns: 1fr; }
+
+  .mobile-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--pad);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    padding: 10px;
+    background-color: var(--bg);
+  }
+
+  .about-toggle { flex: none; }
+
+  .mobile-text {
+    display: block;
+    font-size: 1.1em;
+    margin: 20px 0 0;
+  }
+
+  .mobile-text .copy-head { margin-top: 0; }
+
+  .mobile-text .copy-body { display: none; }
+  .mobile-text.open .copy-body { display: block; margin-top: 1em; }
+
+  .info-toggle {
+    display: block;
+    margin-top: 10px;
+    font: inherit;
+    color: var(--fg);
+
+    appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: none;
+    padding: 0;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  body.about-open { overflow: hidden; }
+
+  body.about-open .about-overlay {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--header-h, 0px);
+    bottom: 0;
+    z-index: 30;
+    background-color: var(--bg);
+    overflow-y: auto;
+    padding: var(--pad);
+  }
+
+  .stamp { padding-top: 15svh; padding-bottom: 24svh; }
+  .spacer { height: 10svh; }
+  .spacer-desktop { height: 20svh; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="mobile-header" id="mobile-header">
+  <div class="mobile-identity"></div>
+  <button type="button" class="about-toggle" aria-expanded="false">
+    ○ About
+  </button>
+</div>
+
+<div class="about-overlay" id="about-overlay">
+  <div class="about-panel" id="about-panel"></div>
+</div>
+
+<!-- EDIT 5 — CV / PRESS / CONTACT.
+     Opens under the About button on desktop, full screen on mobile. -->
+<div class="about-corner">
+  <div class="corner-buttons">
+    <button type="button" id="pane-toggle" class="pane-toggle" aria-pressed="true">
+      ○ Info
+    </button>
+
+    <button type="button" class="about-toggle" aria-expanded="false">
+      ○ About
+    </button>
+  </div>
+
+  <div class="meta">
+
+    <div class="meta-group">
+      <b>CV</b><br />
       <div class="cv-entry">
-        <span class="cv-label"><a href="https://www.plattformproduktion.se/films-features" target="_blank" style="text-decoration: underline;">Plattform Produktion</a><br></span>
+        <span class="cv-label"><a href="https://www.plattformproduktion.se/films-features" class="text-link" target="_blank" rel="noopener noreferrer">Plattform Produktion</a></span>
         <span class="cv-year">2024</span>
       </div>
-      <div class="cv-entry"><span class="cv-label"><i>Creative Assistant Internship</i></span></div>
-      <br>
+      <div class="cv-entry"><span class="cv-label cv-role">Creative Assistant Internship</span></div>
+      <br />
       <div class="cv-entry">
-        <span class="cv-label"><a href="https://ape-creative.club/" target="_blank" style="text-decoration: underline;">APE_CC</a><br></span>
+        <span class="cv-label"><a href="https://ape-creative.club/" class="text-link" target="_blank" rel="noopener noreferrer">APE_CC</a></span>
         <span class="cv-year">2023</span>
       </div>
-      <div class="cv-entry"><span class="cv-label"><i>Design Internship</i></span></div>
-      <br>
+      <div class="cv-entry"><span class="cv-label cv-role">Design Internship</span></div>
+      <br />
       <div class="cv-entry">
-        <span class="cv-label"><a href="https://beckmans.se/" target="_blank" style="text-decoration: underline;">Beckmans College of Design</a></span>
+        <span class="cv-label"><a href="https://beckmans.se/" class="text-link" target="_blank" rel="noopener noreferrer">Beckmans College of Design</a></span>
         <span class="cv-year">2022–2025</span>
       </div>
-      <div class="cv-entry"><span class="cv-label"><i>BFA Visual Communication</i></span></div>
-      <br>
+      <div class="cv-entry"><span class="cv-label cv-role">BFA Visual Communication</span></div>
+      <br />
+      <div class="cv-entry">
+        <span class="cv-label"><a href="https://generaux.services/" class="text-link" target="_blank" rel="noopener noreferrer">Services Généraux</a></span>
+        <span class="cv-year">2025–present</span>
+      </div>
+      <div class="cv-entry"><span class="cv-label cv-role">Art Direction and AI Production</span></div>
+      <br />
       <div class="cv-entry">
         <span class="cv-label">Designed over 15 printed book covers and 50 digital book covers for Egmont, Berghs and Opal.</span>
         <span class="cv-year">2020–present</span>
       </div>
-      <br>
-      <b>Press</b><br>
-      <div class="cv-entry"><span class="cv-label"><a href="https://www.highsnobiety.com/p/lab-off-white-launch/" target="_blank" style="text-decoration: underline;">Highsnobiety</a></span></div>
-      <div class="cv-entry"><span class="cv-label"><a href="https://www.kaltblut-magazine.com/exocarp/" target="_blank" style="text-decoration: underline;">Kaltblut</a></span></div>
-      <div class="cv-entry"><span class="cv-label"><a href="https://www.resume.se/kommunikation/varumarke/aggklockan-fran-beckmansstudenten-ska-forhindra-mental-krasch/" target="_blank" style="text-decoration: underline;">Resumé Väggklockan</a></span></div>
-      <div class="cv-entry"><span class="cv-label"><a href="https://www.instagram.com/p/DKhP720o7gQ/?img_index=1" target="_blank" style="text-decoration: underline;">F&B Happy Scholarship</a></span></div>
-      <div class="cv-entry"><span class="cv-label"><a href="https://odalisquemagazine.com/2025/11/03/atelier-cru-winter-25-26/" target="_blank" style="text-decoration: underline;">Odalisque</a></span></div>
-
-
-
-      <div class="contact">
-        <b>Contact</b><br>
-        <a href="https://www.instagram.com/elvinodelholm/" target="_blank">Instagram: @elvinodelholm</a><br>
-        <a href="mailto:elvin.odelholm@gmail.com">Mail: elvin.odelholm@gmail.com</a>
-      </div>
-      <div class="spacer image-wrapper"></div>
-      <div class="spacer image-wrapper"></div>
     </div>
 
-    <script>
-      const observerOptions = {
-        root: document.getElementById('scroll-area'),
-        threshold: 0.6
-      };
+    <div class="meta-group">
+      <b>PRESS</b><br />
+      <div class="cv-entry"><span class="cv-label"><a href="https://www.highsnobiety.com/p/lab-off-white-launch/" class="text-link" target="_blank" rel="noopener noreferrer">Highsnobiety</a></span></div>
+      <div class="cv-entry"><span class="cv-label"><a href="https://www.kaltblut-magazine.com/exocarp/" class="text-link" target="_blank" rel="noopener noreferrer">Kaltblut</a></span></div>
+      <div class="cv-entry"><span class="cv-label"><a href="https://www.resume.se/kommunikation/varumarke/aggklockan-fran-beckmansstudenten-ska-forhindra-mental-krasch/" class="text-link" target="_blank" rel="noopener noreferrer">Resumé Väggklockan</a></span></div>
+      <div class="cv-entry"><span class="cv-label"><a href="https://www.instagram.com/p/DKhP720o7gQ/?img_index=1" class="text-link" target="_blank" rel="noopener noreferrer">F&amp;B Happy Scholarship</a></span></div>
+      <div class="cv-entry"><span class="cv-label"><a href="https://odalisquemagazine.com/2025/11/03/atelier-cru-winter-25-26/" class="text-link" target="_blank" rel="noopener noreferrer">Odalisque</a></span></div>
+    </div>
 
-      let currentColor = '';
-      const colorIds = {
-        Red: 'text-red',
-        Blue: 'text-blue',
-        Green: 'text-green',
-        Yellow: 'text-yellow',
-        Purple: 'text-purple',
-        Orange: 'text-orange',
-        Pink: 'text-pink',
-        Cyan: 'text-cyan',
-        Magenta: 'text-magenta',
-        Peach: 'text-peach',
-        Cobolt: 'text-cobolt',
-        Black: 'text-black'
-      };
+    <div class="meta-group">
+      <b>CONTACT</b><br />
+      <a href="https://www.instagram.com/elvinodelholm/" target="_blank" rel="noopener noreferrer">Instagram: @elvinodelholm</a><br />
+      <a href="mailto:elvin.odelholm@gmail.com">Mail: elvin.odelholm@gmail.com</a>
+    </div>
 
-      const observer = new IntersectionObserver((entries) => {
-        const visible = entries.find(e => e.isIntersecting);
-        if (visible) {
-          const color = visible.target.getAttribute('data-color');
-          if (!color) return; // guard for non-project wrappers
-          if (color !== currentColor) {
-            currentColor = color;
-            updateTextVisibility(color);
-          }
-        }
-      }, observerOptions);
+  </div>
+</div>
 
-      function updateTextVisibility(activeColor) {
-        for (const [color, id] of Object.entries(colorIds)) {
-          const el = document.getElementById(id);
-          if (!el) continue;
-          el.classList.toggle('active', color === activeColor);
-        }
+<div class="layout info-hidden" id="layout">
+
+  <div class="column-fixed">
+
+    <!-- EDIT 2 — YOUR NAME (also fills the mobile header) -->
+    <div class="identity">
+      <b>ELVIN ODELHOLM</b>
+      <p></p>
+    </div>
+
+    <!-- EDIT 3 — PROJECT TEXTS, one block per project.
+         head = title + role, always visible.
+         body = description + credits, behind the Info button. -->
+    <div class="project-copy-set">
+
+      <!-- shown at the top, before the first project -->
+      <div class="project-copy active" data-project="none"></div>
+
+      <div class="project-copy" data-project="core-curriculum">
+        <div class="copy-head">
+          <b>CORE CURRICULUM</b><br />
+          <i>Photographic Art Project</i>
+        </div>
+        <div class="copy-body">
+          A reflection on Sweden’s compulsory school curriculum, realised as a photographic series and a book containing all 658 core content requirements.
+          <br /><br />
+          Presented at the Graduation Exhibition at Beckmans College of Design, 2025.<br />
+          Winner of the <a href="https://www.instagram.com/p/DKhP720o7gQ/?img_index=1" class="text-link" target="_blank" rel="noopener noreferrer">F&amp;B Happy Scholarship 2025</a>.
+          <div class="copy-credits">
+            <b>Supervisor:</b> Peter Ström<br />
+            <b>Head of Course:</b> Sophia Wood<br />
+            <b>School:</b> Beckmans College of Design
+          </div>
+        </div>
+      </div>
+
+      <div class="project-copy" data-project="atelier-cru">
+        <div class="copy-head">
+          <b>ATELIER CRU</b><br />
+          <i>Brand Photography</i>
+        </div>
+        <div class="copy-body">
+          Brand photography for the launch of Exocarps, a collection by Atelier Cru. Built around zips, layers and peel-away openings, the garments are designed to be unzipped, reconfigured and worn in new ways. The imagery extended this concept of impossible possibilities.
+          <br /><br />
+          Featured in <a href="https://www.kaltblut-magazine.com/exocarp/" class="text-link" target="_blank" rel="noopener noreferrer">Kaltblut</a>.
+          <div class="copy-credits">
+            <b>Client:</b> Atelier Cru<br />
+            <b>Art Direction and Photography:</b> Elvin Odelholm<br />
+            <b>Styling:</b> Rebecca Cohen<br />
+            <b>HMUA:</b> Tony Lundström<br />
+            <b>Fashion Designer:</b> Göran Sundberg
+          </div>
+        </div>
+      </div>
+
+      <div class="project-copy" data-project="off-white-lab">
+        <div class="copy-head">
+          <b>OFF-WHITE™</b><br />
+          <i>AI Visuals and Post Production</i>
+        </div>
+        <div class="copy-body">
+          Services Généraux was asked to create a campaign together with Highsnobiety for the launch of OFF-WHITE™ Lab.
+          <br /><br />
+          My role was to work on the initial pitch, develop concepts for a series of short form visuals as well as producing some of the final art. The attached visuals were part of my personal responsibility.
+          <br /><br />
+          Featured in <a href="https://www.highsnobiety.com/p/lab-off-white-launch/" class="text-link" target="_blank" rel="noopener noreferrer">Highsnobiety</a>.
+          <div class="copy-credits">
+            <b>Client:</b> Off-White™<br />
+            <b>Commissioned by:</b> Highsnobiety<br />
+            <b>Creative Studio:</b> Services Généraux
+          </div>
+        </div>
+      </div>
+
+      <div class="project-copy" data-project="bound-2">
+        <div class="copy-head">
+          <b>BOUND 2</b><br />
+          <i>AI Art Project</i>
+        </div>
+        <div class="copy-body">
+          An explorative series about being bound together.
+          <br /><br />
+          Made for Services Généraux as part of their reoccurring portfolio series.
+          <div class="copy-credits">
+            <b>Art Direction:</b> Elvin Odelholm and Josefine Nicklasson<br />
+            <b>Image Production:</b> Elvin Odelholm<br />
+            <b>Studio:</b> Services Généraux
+          </div>
+        </div>
+      </div>
+
+      <div class="project-copy" data-project="jiminy-cricket">
+        <div class="copy-head">
+          <b>JIMINY CRICKET</b><br />
+          <i>Art Project</i>
+        </div>
+        <div class="copy-body">
+          Svenskt Tenn and the Beijer Foundation collaborated with Beckmans College of Design to create an annual exhibition spreading awareness on current topics of research. The topic of 2024 was AI, my group explored a future scenario in which AI would work as an external supercharged conscience, helping people to make moral decisions. To highlight our area of research and to draw attention to the exhibition, me and a classmate built a two meter tall buffed up Jiminy Cricket out of styrofoam and green paint.
+          <br /><br />
+          The sculpture was exhibited at the Svenskt Tenn Stockholm Store and later at Riche Fenix.
+          <div class="copy-credits">
+            <b>Team:</b> Elvin Odelholm and Jonatan Modin<br />
+            <b>Collaborators:</b> Beijer Foundation and Svenskt Tenn<br />
+            <b>Head of Course:</b> Sophia Wood<br />
+            <b>School:</b> Beckmans College of Design
+          </div>
+        </div>
+      </div>
+
+      <div class="project-copy" data-project="ad-space">
+        <div class="copy-head">
+          <b>AD-SPACE FOR RENT</b><br />
+          <i>Photographic Art Project</i>
+        </div>
+        <div class="copy-body">
+          Name a public surface, that isn’t a potential ad space. To explore the concept of public advertising, I borrowed a horse on the Swedish countryside and tried putting it to work.
+          <br /><br />
+          <b>Translation:</b> Ad-Space For Rent!
+          <br /><br />
+          Part of my application work for Beckmans College of Design.
+          <div class="copy-credits">
+            <b>Solo Project</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-copy" data-project="micro-shorts">
+        <div class="copy-head">
+          <b>MICRO-SHORTS</b><br />
+          <i>Video Art Project</i>
+        </div>
+        <div class="copy-body">
+          Videos shot on iPhone as part of a personal series.
+          <div class="copy-credits">
+            <b>Solo Project</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-copy" data-project="deepfake">
+        <div class="copy-head">
+          <b>DEEPFAKE</b><br />
+          <i>AI Art Project</i>
+        </div>
+        <div class="copy-body">
+          Visuals made with AI as part of a personal series.
+          <div class="copy-credits">
+            <b>Solo Project</b>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-copy" data-project="material-worlds">
+        <div class="copy-head">
+          <b>MATERIAL WORLDS</b><br />
+          <i>Lookbook Photography</i>
+        </div>
+        <div class="copy-body">
+          Lookbook photography for Material Worlds, a fashion show by students at Beckmans College of Design. To highlight the diverse materials in each look, every model was placed within a landscape constructed out of materials featured in their garments.
+          <div class="copy-credits">
+            <b>Art Direction:</b> Elvin Odelholm<br />
+            <b>Photography:</b> Elvin Odelholm and Jesper Smeding<br />
+            <b>Head of Course:</b> Göran Sundberg<br />
+            <b>Head of Program:</b> Pär Engsheden
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="scroll-area" id="scroll-area">
+
+  <!-- the scroll loops through everything in here -->
+  <div class="loop-unit">
+
+    <!-- the portrait that spins as you scroll -->
+    <div class="image-wrapper stamp">
+      <img class="stamp-image" alt=""
+           src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'><circle cx='300' cy='300' r='290' fill='%23141414' stroke='%23555'/></svg>" />
+    </div>
+
+    <!-- EDIT 4 — IMAGES. Slug must match a text block in EDIT 3. -->
+    <div class="grid">
+
+      <!-- CORE CURRICULUM -->
+      <div class="image-wrapper" data-project="core-curriculum">
+        <img src="assets/centralt innehall mjolk3 elvin odelholm.jpg" alt="" />
+      </div>
+
+      <div class="image-wrapper" data-project="core-curriculum">
+        <img src="assets/centralt innehall mjolk4 elvin odelholm.jpg" alt="" />
+      </div>
+
+      <div class="mobile-text" data-copy-for="core-curriculum"></div>
+
+      <div class="divider"></div>
+
+      <!-- ATELIER CRU -->
+      <div class="image-wrapper" data-project="atelier-cru">
+        <img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-4.jpg" alt="" />
+      </div>
+
+      <div class="image-wrapper" data-project="atelier-cru">
+        <img src="assets/Atelier_Cru_Foto-Elvin_Odelholm_2025-5.jpg" alt="" />
+      </div>
+
+      <div class="mobile-text" data-copy-for="atelier-cru"></div>
+
+      <div class="divider"></div>
+
+      <!-- OFF-WHITE™ LAB -->
+      <div class="image-wrapper" data-project="off-white-lab">
+        <video autoplay muted loop playsinline>
+          <source src="assets/off white signs elvin odelholm.mp4" type="video/mp4" />
+        </video>
+      </div>
+
+      <div class="image-wrapper" data-project="off-white-lab">
+        <img src="assets/off white 350 spec sheet elvin odelholm.jpg" alt="" />
+      </div>
+
+      <div class="mobile-text" data-copy-for="off-white-lab"></div>
+
+      <div class="divider"></div>
+
+      <!-- BOUND 2 -->
+      <div class="image-wrapper" data-project="bound-2">
+        <img src="assets/bound 2 01-black dog-V09 elvin odelholm.jpg" alt="" />
+      </div>
+
+      <div class="image-wrapper" data-project="bound-2">
+        <img src="assets/bound 2 09-airpods-V04 elvin odelholm.jpg" alt="" />
+      </div>
+
+      <div class="mobile-text" data-copy-for="bound-2"></div>
+
+      <div class="divider"></div>
+
+      <!-- JIMINY CRICKET -->
+      <div class="image-wrapper" data-project="jiminy-cricket">
+        <img src="assets/beijer bts8 elvin odelholm.jpg" alt="" />
+      </div>
+
+      <div class="image-wrapper" data-project="jiminy-cricket">
+        <img src="assets/beijer svenskt tenn elvin odelholm.jpg" alt="" />
+      </div>
+
+      <div class="mobile-text" data-copy-for="jiminy-cricket"></div>
+
+      <div class="divider"></div>
+
+           <!-- MATERIAL WORLDS -->
+      <div class="image-wrapper" data-project="material-worlds">
+        <img src="assets/material worlds arvid elvin odelholm.jpg" alt="" />
+      </div>
+
+      <div class="image-wrapper" data-project="material-worlds">
+        <img src="assets/material worlds julia elvin odelholm.jpg" alt="" />
+      </div>
+
+      <div class="mobile-text" data-copy-for="material-worlds"></div>
+
+      <div class="divider"></div>
+
+      <!-- AD-SPACE FOR RENT -->
+      <div class="image-wrapper" data-project="ad-space">
+        <img src="assets/ad horse bts1 elvin odelholm.jpg" alt="" />
+      </div>
+
+      <div class="image-wrapper" data-project="ad-space">
+        <img src="assets/ad horse elvin odelholm.jpg" alt="" />
+      </div>
+
+      <div class="mobile-text" data-copy-for="ad-space"></div>
+
+      <div class="divider"></div>
+
+      <!-- MICRO-SHORTS -->
+      <div class="image-wrapper" data-project="micro-shorts">
+        <iframe src="https://player.vimeo.com/video/1114202441?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
+                title="Motorcross" loading="lazy"
+                allow="autoplay; fullscreen; picture-in-picture"
+                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+
+      <div class="image-wrapper" data-project="micro-shorts">
+        <iframe src="https://player.vimeo.com/video/1114201026?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0"
+                title="Parkering" loading="lazy"
+                allow="autoplay; fullscreen; picture-in-picture"
+                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+      </div>
+
+      <div class="mobile-text" data-copy-for="micro-shorts"></div>
+
+      <div class="divider"></div>
+
+      <!-- DEEPFAKE -->
+      <div class="image-wrapper" data-project="deepfake">
+        <img src="assets/enok-carface-2-elvin-odelholm.jpg" alt="" />
+      </div>
+
+      <div class="image-wrapper" data-project="deepfake">
+        <img src="assets/enok-crows-2-elvin-odelholm.jpg" alt="" />
+      </div>
+
+      <div class="mobile-text" data-copy-for="deepfake"></div>
+
+      <div class="spacer-desktop"></div>
+
+      <div class="spacer"></div>
+
+    </div>
+  </div>
+  </div>
+</div>
+
+<script>
+
+// copy the text into the mobile header, about panel and captions
+const identity = document.querySelector('.identity');
+const mobileIdentity = document.querySelector('.mobile-identity');
+if (identity && mobileIdentity) mobileIdentity.innerHTML = identity.innerHTML;
+
+const meta = document.querySelector('.meta');
+const aboutPanel = document.getElementById('about-panel');
+if (meta && aboutPanel) aboutPanel.innerHTML = meta.innerHTML;
+
+document.querySelectorAll('.mobile-text[data-copy-for]').forEach(slot => {
+  const source = document.querySelector(
+    '.project-copy[data-project="' + slot.dataset.copyFor + '"]'
+  );
+  if (!source) return;
+
+  slot.innerHTML = source.innerHTML;
+
+  const body = slot.querySelector('.copy-body');
+  if (!body) return;
+
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'info-toggle';
+  button.textContent = '○ Info';
+  button.setAttribute('aria-expanded', 'false');
+
+  slot.insertBefore(button, body);
+});
+
+// clone the page 3x so the scroll can loop
+const COPIES = 3;
+
+const scrollArea = document.getElementById('scroll-area');
+const loopUnit = scrollArea.querySelector('.loop-unit');
+
+for (let i = 1; i < COPIES; i++) {
+  const copy = loopUnit.cloneNode(true);
+  copy.classList.add('loop-clone');
+  copy.setAttribute('aria-hidden', 'true');
+  copy.querySelectorAll('[id]').forEach(el => el.removeAttribute('id'));
+  scrollArea.appendChild(copy);
+}
+
+// swap the caption when a project scrolls into view
+const copyBlocks = document.querySelectorAll('.project-copy');
+
+let currentProject = '';
+
+function showCopy(slug) {
+  copyBlocks.forEach(block => {
+    block.classList.toggle('active', block.dataset.project === slug);
+  });
+}
+
+const observer = new IntersectionObserver(entries => {
+  const visible = entries.find(entry => entry.isIntersecting);
+  if (!visible) return;
+
+  const slug = visible.target.dataset.project;
+  if (!slug || slug === currentProject) return;
+
+  currentProject = slug;
+  showCopy(slug);
+}, { root: scrollArea, threshold: 0.6 });
+
+document.querySelectorAll('.image-wrapper[data-project]').forEach(tile => {
+  observer.observe(tile);
+});
+
+// the loop, and the stamp that spins with it
+const SPIN = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 0.2;
+const MOBILE = window.matchMedia('(max-width: 768px)');
+const stamps = document.querySelectorAll('.stamp-image');
+const mobileHeader = document.getElementById('mobile-header');
+
+let unitHeight = 0;
+let origin = 0;
+let lastTop = 0;
+let angle = 0;
+
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+function pageScrolls() { return MOBILE.matches; }
+function getTop() { return pageScrolls() ? window.scrollY : scrollArea.scrollTop; }
+function setTop(value) {
+  if (pageScrolls()) window.scrollTo(0, value);
+  else scrollArea.scrollTop = value;
+}
+
+function measure() {
+  const units = scrollArea.querySelectorAll('.loop-unit');
+  unitHeight = units.length > 1 ? units[1].offsetTop - units[0].offsetTop : 0;
+
+  const frameTop = pageScrolls() ? 0 : scrollArea.getBoundingClientRect().top;
+  origin = units[0].getBoundingClientRect().top - frameTop + getTop();
+
+  if (mobileHeader) {
+    document.documentElement.style.setProperty(
+      '--header-h', mobileHeader.offsetHeight + 'px'
+    );
+  }
+}
+
+function seat() {
+  const previousHeight = unitHeight;
+  const previousOrigin = origin;
+  const top = getTop();
+
+  measure();
+  if (!unitHeight) return;
+
+  const fraction = previousHeight
+    ? (top - previousOrigin - previousHeight) / previousHeight
+    : 0;
+
+  setTop(origin + unitHeight + unitHeight * fraction);
+  lastTop = getTop();
+}
+
+function normalize() {
+  if (!unitHeight) return;
+  const top = getTop();
+
+  if (top >= origin + unitHeight * 2) {
+    setTop(top - unitHeight);
+    lastTop -= unitHeight;
+  } else if (top < origin + unitHeight) {
+    setTop(top + unitHeight);
+    lastTop += unitHeight;
+  }
+}
+
+function onScroll() {
+  normalize();
+
+  angle += (getTop() - lastTop) * SPIN;
+  lastTop = getTop();
+
+  stamps.forEach(img => {
+    img.style.transform = 'rotate(' + angle + 'deg)';
+  });
+}
+
+scrollArea.addEventListener('scroll', onScroll);
+window.addEventListener('scroll', onScroll);
+
+seat();
+
+window.addEventListener('load', seat);
+window.addEventListener('resize', seat);
+
+// Info button
+const layout = document.getElementById('layout');
+const paneToggle = document.getElementById('pane-toggle');
+
+paneToggle.addEventListener('click', () => {
+  const hidden = layout.classList.toggle('info-hidden');
+  paneToggle.textContent = hidden ? '○ Info' : '● Info';
+  paneToggle.setAttribute('aria-pressed', String(hidden));
+
+  seat();
+});
+
+// Info buttons on mobile, one per caption
+document.addEventListener('click', event => {
+  const button = event.target.closest('.info-toggle');
+  if (!button) return;
+
+  const caption = button.closest('.mobile-text');
+  const slug = caption.dataset.copyFor;
+  const open = !caption.classList.contains('open');
+
+  document.querySelectorAll('.mobile-text[data-copy-for="' + slug + '"]')
+    .forEach(node => {
+      node.classList.toggle('open', open);
+      const b = node.querySelector('.info-toggle');
+      if (b) {
+        b.textContent = open ? '● Info' : '○ Info';
+        b.setAttribute('aria-expanded', String(open));
       }
+    });
 
-      // Only observe project tiles (with a data-color)
-      document.querySelectorAll('.image-wrapper[data-color]').forEach(wrapper => {
-        observer.observe(wrapper);
-      });
+  measure();
+  normalize();
+});
 
-      const spinImg = document.getElementById('spinning-portrait');
-      const scrollArea = document.getElementById('scroll-area');
+// About button
+document.addEventListener('click', event => {
+  if (!event.target.closest('.about-toggle')) return;
 
-      scrollArea.addEventListener('scroll', () => {
-        const scrollTop = scrollArea.scrollTop;
-        const rotation = scrollTop * 0.2; // adjust multiplier for spin speed
-        spinImg.style.transform = `rotate(${rotation}deg)`;
-      });
-    </script>
+  const open = document.body.classList.toggle('about-open');
 
-    <!-- Vimeo player API (optional; include if you'll control playback via JS) -->
-    <script src="https://player.vimeo.com/api/player.js"></script>
-  </body>
+  document.querySelectorAll('.about-toggle').forEach(button => {
+    button.textContent = open ? '● About' : '○ About';
+    button.setAttribute('aria-expanded', String(open));
+  });
+});
+</script>
+
+</body>
 </html>
